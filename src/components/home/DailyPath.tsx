@@ -93,123 +93,149 @@ export const DailyPath: React.FC<DailyPathProps> = ({ onStartTaskPractice }) => 
 
   return (
     <section className="py-16 sm:py-20 bg-white border-b border-[#E8E2EF]" id="daily-path">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1E9FF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
               <CalendarDays className="w-3.5 h-3.5" />
               <span>Daily Practice Routine</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
               Daily Path: <span className="text-[#5425A8]">4 Habits a Day</span>
             </h2>
-            <p className="text-xs sm:text-sm text-[#6F687A] mt-1">
+            <p className="text-xs sm:text-sm text-[#706879] mt-1">
               Check off your daily problems to maintain continuous preparation momentum.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 bg-[#FAF8FD] border border-[#E8E2EF] px-3 py-1.5 rounded-xl text-xs">
+          <div className="flex items-center gap-2 bg-[#FAF8FD] border border-[#E8E2EF] px-3.5 py-2 rounded-2xl text-xs shadow-xs">
             <Flame className="w-4 h-4 fill-[#FFD84D] text-[#92400E]" />
-            <span className="font-semibold text-[#211B2B]">14-Day Streak</span>
-            <span className="text-[#6F687A]">({completedCount}/{totalTasks} Done)</span>
+            <span className="font-bold text-[#211B2B]">14-Day Streak</span>
+            <span className="text-[#706879]">({completedCount}/{totalTasks} Done)</span>
           </div>
         </div>
 
-        {/* Progress bar */}
-        <div className="mb-6">
-          <div className="flex justify-between text-xs text-[#6F687A] mb-1.5 font-medium">
-            <span>Today's Completion</span>
-            <span className="text-[#211B2B] font-bold">{progressPercent}%</span>
-          </div>
-          <div className="w-full h-2 rounded-full bg-[#E8E2EF] overflow-hidden">
-            <div
-              className="h-full bg-[#5425A8] rounded-full transition-all duration-300"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-        </div>
+        {/* 2-Column Visual Journey Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Column: Interactive Tasks Checklist (Span 7) */}
+          <div className="lg:col-span-7 space-y-5">
+            
+            {/* Progress bar */}
+            <div>
+              <div className="flex justify-between text-xs text-[#706879] mb-1.5 font-medium">
+                <span>Today's Milestone Progress</span>
+                <span className="text-[#211B2B] font-bold">{progressPercent}%</span>
+              </div>
+              <div className="w-full h-2.5 rounded-full bg-[#E8E2EF] overflow-hidden">
+                <div
+                  className="h-full bg-[#5425A8] rounded-full transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            </div>
 
-        {/* Tasks Checklist */}
-        <div className="space-y-2 mb-6">
-          {tasks.map((task) => (
-            <div
-              key={task.id}
-              onClick={() => toggleTask(task.id)}
-              className={`p-3.5 rounded-xl border transition-all flex items-center justify-between gap-3 cursor-pointer select-none ${
-                task.completed
-                  ? 'bg-[#FAF8FD] border-[#E8E2EF] opacity-75'
-                  : 'bg-white border-[#E8E2EF] hover:border-[#5425A8]'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleTask(task.id);
-                  }}
-                  className="focus:outline-none"
-                  aria-label={task.completed ? 'Mark incomplete' : 'Mark complete'}
+            {/* Tasks Checklist */}
+            <div className="space-y-2.5">
+              {tasks.map((task) => (
+                <div
+                  key={task.id}
+                  onClick={() => toggleTask(task.id)}
+                  className={`p-3.5 rounded-2xl border transition-all flex items-center justify-between gap-3 cursor-pointer select-none shadow-2xs ${
+                    task.completed
+                      ? 'bg-[#FAF8FD] border-[#E8E2EF] opacity-75'
+                      : 'bg-white border-[#E8E2EF] hover:border-[#5425A8] hover:shadow-xs'
+                  }`}
                 >
-                  {task.completed ? (
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 fill-emerald-100" />
-                  ) : (
-                    <Circle className="w-5 h-5 text-[#E8E2EF] hover:text-[#5425A8]" />
-                  )}
-                </button>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleTask(task.id);
+                      }}
+                      className="focus:outline-none"
+                      aria-label={task.completed ? 'Mark incomplete' : 'Mark complete'}
+                    >
+                      {task.completed ? (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-600 fill-emerald-100" />
+                      ) : (
+                        <Circle className="w-5 h-5 text-[#E8E2EF] hover:text-[#5425A8]" />
+                      )}
+                    </button>
 
-                <div>
+                    <div>
+                      <span
+                        className={`text-xs sm:text-sm font-semibold block ${
+                          task.completed ? 'line-through text-[#706879]' : 'text-[#211B2B]'
+                        }`}
+                      >
+                        {task.title}
+                      </span>
+                      <span className="text-[11px] text-[#706879]">
+                        {task.category} • ~{task.estimatedMinutes} mins
+                      </span>
+                    </div>
+                  </div>
+
                   <span
-                    className={`text-xs sm:text-sm font-semibold block ${
-                      task.completed ? 'line-through text-[#6F687A]' : 'text-[#211B2B]'
+                    className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                      task.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-[#F1E9FF] text-[#5425A8] border border-purple-100'
                     }`}
                   >
-                    {task.title}
-                  </span>
-                  <span className="text-[11px] text-[#6F687A]">
-                    {task.category} • ~{task.estimatedMinutes} mins
+                    {task.completed ? 'Done' : 'Pending'}
                   </span>
                 </div>
+              ))}
+            </div>
+
+            {/* Actions Row */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={handleCompleteNextTask}
+                  disabled={isAllComplete}
+                  rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+                >
+                  Complete Next Task
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleResetTasks}
+                  leftIcon={<RotateCcw className="w-3 h-3 text-[#706879]" />}
+                >
+                  Reset Today
+                </Button>
               </div>
 
-              <span
-                className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                  task.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-[#FAF8FD] text-[#6F687A] border border-[#E8E2EF]'
-                }`}
-              >
-                {task.completed ? 'Done' : 'Pending'}
+              <span className="text-[11px] text-[#706879]">
+                * Progress saved locally in your current browser session.
               </span>
             </div>
-          ))}
-        </div>
 
-        {/* Actions Row */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-          <div className="flex items-center gap-2">
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={handleCompleteNextTask}
-              disabled={isAllComplete}
-              rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
-            >
-              Complete Next Task
-            </Button>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleResetTasks}
-              leftIcon={<RotateCcw className="w-3 h-3 text-[#6F687A]" />}
-            >
-              Reset Today
-            </Button>
           </div>
 
-          <span className="text-[11px] text-[#6F687A]">
-            * Progress saved locally in your current browser session.
-          </span>
+          {/* Right Column: 3D Quest Roadmap Visual (Span 5) */}
+          <div className="lg:col-span-5 relative rounded-3xl overflow-hidden bg-gradient-to-tr from-[#FAF8FD] to-[#F1E9FF] border border-[#E8E2EF] p-2.5 shadow-sm group">
+            <div className="relative rounded-2xl overflow-hidden bg-white shadow-xs">
+              <img
+                src="/images/daily-journey.jpg"
+                alt="3D Daily Coding Practice Roadmap Journey with DKODER Robot Mascot"
+                className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-[#E8E2EF] text-[10px] font-bold text-[#5425A8] shadow-xs flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#FFD84D]" />
+                <span>Interactive Practice Journey</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>

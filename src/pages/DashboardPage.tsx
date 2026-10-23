@@ -39,12 +39,19 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
               <span>/</span>
               <span className="text-[#211B2B] font-semibold">Student Dashboard</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
-              Welcome back, <span className="text-[#5425A8]">Vaanadhi K.</span>
-            </h1>
-            <p className="text-xs sm:text-sm text-[#6F687A]">
-              Anna University (CEG Campus) • Computer Science & Engineering (2026 Batch)
-            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl overflow-hidden bg-[#FFD84D] border border-[#E8E2EF] shadow-xs shrink-0">
+                <img src="/images/mascot-avatar.jpg" alt="DKODER Mascot" className="w-full h-full object-cover" />
+              </div>
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
+                  Welcome back, <span className="text-[#5425A8]">Vaanadhi K.</span>
+                </h1>
+                <p className="text-xs sm:text-sm text-[#6F687A]">
+                  Anna University (CEG Campus) • Computer Science & Engineering (2026 Batch)
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center gap-2">

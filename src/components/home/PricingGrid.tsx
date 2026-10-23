@@ -80,16 +80,22 @@ export const PricingGrid: React.FC<PricingGridProps> = ({ onNavigate }) => {
                 }`}
               >
                 {isRecommended && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#5425A8] text-white px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                    Recommended
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#5425A8] text-[#FFD84D] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1 shadow-sm border border-[#FFD84D]/40">
+                    <Sparkles className="w-3 h-3 text-[#FFD84D] fill-[#FFD84D]" />
+                    <span>Most Popular</span>
                   </div>
                 )}
 
                 <div>
-                  <h3 className="text-base font-bold text-[#211B2B]">
-                    {plan.name}
-                  </h3>
-                  <p className="text-xs text-[#6F687A] mt-0.5 min-h-[30px] leading-relaxed">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <h3 className="text-base font-bold text-[#211B2B]">
+                      {plan.name}
+                    </h3>
+                    <span className="text-sm">
+                      {plan.name === 'Bronze' ? '🥉' : plan.name === 'Silver' ? '🥈' : plan.name === 'Gold' ? '🥇' : plan.name === 'Platinum' ? '💎' : '🚀'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#706879] mt-0.5 min-h-[30px] leading-relaxed">
                     {plan.tagline}
                   </p>
 

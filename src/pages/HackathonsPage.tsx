@@ -92,17 +92,33 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
         </div>
 
         {/* Page Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
+        <div className="text-center max-w-2xl mx-auto mb-8">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1E9FF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
             <Trophy className="w-3.5 h-3.5" />
             <span>Collegiate Coding Contests</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-[#211B2B] tracking-tight">
-            Campus Hackathons & <span className="text-[#5425A8]">Live Contests</span>
+            Campus Hackathons & <span className="text-[#5425A8]">Live Arena</span>
           </h1>
-          <p className="mt-2 text-sm text-[#6F687A]">
-            Compete with engineering peers across India. Benchmark your speed under timed conditions.
+          <p className="mt-2 text-sm text-[#706879]">
+            Compete with engineering peers across India. Benchmark your speed under real-time timed conditions.
           </p>
+        </div>
+
+        {/* 3D Hackathon Arena Visual Banner */}
+        <div className="max-w-4xl mx-auto mb-10 relative rounded-3xl overflow-hidden bg-gradient-to-tr from-[#FAF8FD] to-[#F1E9FF] border border-[#E8E2EF] p-2.5 shadow-md group">
+          <div className="relative rounded-2xl overflow-hidden bg-white shadow-xs">
+            <img
+              src="/images/hackathon-arena.jpg"
+              alt="DKODER 3D Collegiate Hackathon Arena with Live Timers, Prizes, and Coding Teams"
+              className="w-full max-h-[380px] object-cover group-hover:scale-101 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-[#E8E2EF] text-xs font-bold text-[#211B2B] shadow-md flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFD84D] animate-ping" />
+              <span>DKODER Hackathon Arena • Season 4 Live</span>
+            </div>
+          </div>
         </div>
 
         {/* Contests List */}

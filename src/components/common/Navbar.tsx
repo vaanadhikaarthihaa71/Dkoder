@@ -66,14 +66,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
               className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
               aria-label="DKODER Home"
             >
-              <div className="w-9 h-9 rounded-xl bg-[#5425A8] flex items-center justify-center text-[#FFD84D] shadow-sm">
-                <Code2 className="w-5 h-5 stroke-[2.5]" />
+              <div className="w-9 h-9 rounded-xl overflow-hidden bg-[#FFD84D] flex items-center justify-center shadow-xs border border-[#E8E2EF] group-hover:scale-105 transition-transform">
+                <img src="/images/mascot-avatar.jpg" alt="DKODER 3D Mascot" className="w-full h-full object-cover" />
               </div>
               <div className="flex items-baseline gap-1.5">
                 <span className="font-extrabold text-xl tracking-tight text-[#211B2B]">
                   DK<span className="text-[#5425A8]">ODER</span>
                 </span>
-                <span className="text-[10px] font-semibold text-[#6F687A] hidden sm:inline-block">
+                <span className="text-[10px] font-semibold text-[#706879] hidden sm:inline-block">
                   Placement LMS
                 </span>
               </div>

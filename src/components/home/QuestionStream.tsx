@@ -116,21 +116,33 @@ export const QuestionStream: React.FC<QuestionStreamProps> = ({
                   </div>
 
                   {/* Title */}
-                  <h4 className="text-sm font-semibold text-[#211B2B] line-clamp-1 mb-1">
+                  <h4 className="text-sm font-bold text-[#211B2B] line-clamp-1 mb-1 group-hover:text-[#5425A8] transition-colors">
                     {q.title}
                   </h4>
 
                   {/* Description */}
-                  <p className="text-xs text-[#6F687A] line-clamp-2 leading-relaxed mb-3">
+                  <p className="text-xs text-[#706879] line-clamp-2 leading-relaxed mb-2.5">
                     {q.description}
                   </p>
+
+                  {/* Compact Visual Code / Question Preview */}
+                  <div className="mb-3 px-2.5 py-1.5 rounded-lg bg-[#211B2B] text-emerald-400 font-mono text-[11px] flex items-center justify-between border border-[#211B2B]/20">
+                    <span className="truncate">
+                      {q.format === 'Coding' 
+                        ? `> def solve_${q.id.replace(/-/g, '_')}(nums): ...` 
+                        : `> [Option 1] O(N)  [Option 2] O(log N) ...`}
+                    </span>
+                    <span className="text-[10px] text-purple-300 font-sans font-semibold shrink-0 ml-2">
+                      {q.format === 'Coding' ? 'Live Sandbox' : 'Concept Quiz'}
+                    </span>
+                  </div>
 
                   {/* Topic Tag chips */}
                   <div className="flex flex-wrap gap-1 mb-3">
                     {q.topicTags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#FAF8FD] text-[#6F687A] border border-[#E8E2EF]"
+                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#FAF8FD] text-[#706879] border border-[#E8E2EF]"
                       >
                         {tag}
                       </span>

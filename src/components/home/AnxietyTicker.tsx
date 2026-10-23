@@ -36,44 +36,92 @@ export const AnxietyTicker: React.FC<AnxietyTickerProps> = ({ onNavigateToTrack 
           </p>
         </div>
 
-        {/* 6 Clean Question Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {ANXIETY_QUERIES.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setSelectedQuery(item)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setSelectedQuery(item);
-                }
-              }}
-              className="text-left p-5 rounded-2xl bg-white border border-[#E8E2EF] hover:border-[#5425A8] hover:bg-[#FAF8FD] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#5425A8] cursor-pointer flex flex-col justify-between group"
-              aria-haspopup="dialog"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[11px] font-semibold text-[#5425A8] bg-[#F3EDFF] px-2.5 py-0.5 rounded-full">
-                    {item.category}
+        {/* Image-Rich Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Column: Visual Storytelling Feature Card (Span 4) */}
+          <div className="lg:col-span-4 bg-gradient-to-b from-[#FAF8FD] to-[#F1E9FF] rounded-3xl border border-[#E8E2EF] p-4 sm:p-5 shadow-sm space-y-4">
+            
+            <div className="relative rounded-2xl overflow-hidden bg-white shadow-xs border border-[#E8E2EF]">
+              <img
+                src="/images/student-anxiety.jpg"
+                alt="3D Student finding placement clarity with DKODER Robot Mascot"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+              <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-[#E8E2EF] text-[10px] font-bold text-[#5425A8] shadow-xs">
+                💡 Clarity First
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="text-base font-bold text-[#211B2B]">
+                From Interview Confusion to Confident Coding
+              </h3>
+              <p className="text-xs text-[#706879] leading-relaxed">
+                Whether you're starting from zero in your 3rd year or aiming for a 20+ LPA Super Dream role, structured modular practice removes the guesswork.
+              </p>
+            </div>
+
+            {/* Interactive Topic Pills */}
+            <div className="pt-2 border-t border-[#E8E2EF]">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#706879] mb-2">
+                Core Placement Pillars:
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {['Data Structures', 'Algorithmic Speed', 'SQL & DBMS', 'Quantitative Aptitude', 'Company Mock Rounds'].map((pill) => (
+                  <span
+                    key={pill}
+                    className="text-[11px] px-2.5 py-0.5 rounded-md bg-white text-[#211B2B] border border-[#E8E2EF] font-medium shadow-2xs"
+                  >
+                    {pill}
                   </span>
-                  <ChevronRight className="w-4 h-4 text-[#6F687A] group-hover:text-[#5425A8] group-hover:translate-x-0.5 transition-all" />
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: 6 Interactive Question Cards (Span 8) */}
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            {ANXIETY_QUERIES.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setSelectedQuery(item)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedQuery(item);
+                  }
+                }}
+                className="text-left p-4.5 rounded-2xl bg-white border border-[#E8E2EF] hover:border-[#5425A8] hover:bg-[#FAF8FD] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#5425A8] cursor-pointer flex flex-col justify-between group shadow-2xs"
+                aria-haspopup="dialog"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[11px] font-bold text-[#5425A8] bg-[#F1E9FF] px-2.5 py-0.5 rounded-full border border-purple-100">
+                      {item.category}
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-[#706879] group-hover:text-[#5425A8] group-hover:translate-x-0.5 transition-all" />
+                  </div>
+
+                  <h3 className="text-sm font-bold text-[#211B2B] group-hover:text-[#5425A8] transition-colors mb-1.5 leading-snug">
+                    {item.question}
+                  </h3>
+
+                  <p className="text-xs text-[#706879] line-clamp-2 leading-relaxed">
+                    {item.shortAnswer}
+                  </p>
                 </div>
 
-                <h3 className="text-sm font-semibold text-[#211B2B] group-hover:text-[#5425A8] transition-colors mb-1.5">
-                  {item.question}
-                </h3>
+                <div className="mt-4 pt-2.5 border-t border-[#E8E2EF] flex items-center justify-between text-xs font-semibold text-[#5425A8]">
+                  <span>Action roadmap →</span>
+                  <span className="text-[11px] text-[#706879] font-normal">{item.recommendedTrack}</span>
+                </div>
+              </button>
+            ))}
+          </div>
 
-                <p className="text-xs text-[#6F687A] line-clamp-2 leading-relaxed">
-                  {item.shortAnswer}
-                </p>
-              </div>
-
-              <div className="mt-4 pt-3 border-t border-[#E8E2EF] flex items-center justify-between text-xs font-medium text-[#5425A8]">
-                <span>View action steps →</span>
-                <span className="text-[11px] text-[#6F687A]">{item.recommendedTrack}</span>
-              </div>
-            </button>
-          ))}
         </div>
 
       </div>

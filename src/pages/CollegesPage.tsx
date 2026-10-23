@@ -59,49 +59,69 @@ export const CollegesPage: React.FC<CollegesPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* Hero Section */}
-        <div className="bg-white border border-[#E8E2EF] rounded-2xl p-8 sm:p-12 shadow-xs">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider">
-              <GraduationCap className="w-3.5 h-3.5" />
-              <span>Institutional Placement LMS</span>
+        <div className="bg-white border border-[#E8E2EF] rounded-3xl p-6 sm:p-10 shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            {/* Left Info Column */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1E9FF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider">
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span>Institutional Placement LMS</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-[#211B2B] tracking-tight leading-tight">
+                Data-driven placement readiness for <span className="text-[#5425A8]">engineering institutions</span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-[#706879] leading-relaxed">
+                Equip your Training & Placement (TnP) department with cohort practice telemetry, automated diagnostic tests, and customized recruiter mock patterns.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={() => setIsDemoModalOpen(true)}
+                  rightIcon={<Calendar className="w-4 h-4" />}
+                >
+                  Schedule Demo Session
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="md"
+                  onClick={handleDownloadBrochure}
+                  leftIcon={<Download className="w-4 h-4 text-[#5425A8]" />}
+                >
+                  Download LMS Brochure
+                </Button>
+
+                <Button
+                  variant="ghost"
+                  size="md"
+                  onClick={() => onNavigate('/partner-mou')}
+                  className="text-[#5425A8] font-semibold"
+                >
+                  Apply for Campus MOU →
+                </Button>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-bold text-[#211B2B] tracking-tight leading-tight">
-              Data-driven placement readiness for <span className="text-[#5425A8]">engineering institutions</span>
-            </h1>
-
-            <p className="text-base text-[#6F687A] leading-relaxed">
-              Equip your Training & Placement (TnP) department with cohort practice telemetry, automated diagnostic tests, and customized recruiter mock patterns.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Button
-                variant="primary"
-                size="md"
-                onClick={() => setIsDemoModalOpen(true)}
-                rightIcon={<Calendar className="w-4 h-4" />}
-              >
-                Schedule Demo Session
-              </Button>
-
-              <Button
-                variant="outline"
-                size="md"
-                onClick={handleDownloadBrochure}
-                leftIcon={<Download className="w-4 h-4 text-[#5425A8]" />}
-              >
-                Download LMS Brochure
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="md"
-                onClick={() => onNavigate('/partner-mou')}
-                className="text-[#5425A8] font-semibold"
-              >
-                Apply for Campus MOU →
-              </Button>
+            {/* Right 3D Visual Column */}
+            <div className="lg:col-span-5 relative rounded-2xl overflow-hidden bg-gradient-to-tr from-[#FAF8FD] to-[#F1E9FF] border border-[#E8E2EF] p-2 shadow-xs group">
+              <div className="relative rounded-xl overflow-hidden bg-white">
+                <img
+                  src="/images/institutional-analytics.jpg"
+                  alt="DKODER Institutional Analytics Dashboard"
+                  className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2 py-0.5 rounded-lg border border-[#E8E2EF] text-[10px] font-bold text-[#5425A8] shadow-xs">
+                  Campus TnP Suite
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 

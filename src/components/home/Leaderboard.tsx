@@ -54,48 +54,72 @@ export const Leaderboard: React.FC = () => {
           </p>
         </div>
 
-        {/* Clean Top-3 Podium */}
+        {/* Clean Top-3 Podium with 3D Illustration */}
         {topThree.length >= 3 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10 items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center mb-10">
             
-            {/* Rank 2 */}
-            <div className="order-2 md:order-1 bg-[#FAF8FD] rounded-2xl border border-[#E8E2EF] p-4 text-center">
-              <div className="w-14 h-14 rounded-full bg-slate-200 text-[#211B2B] font-bold flex items-center justify-center mx-auto mb-2 text-sm">
-                #2
-              </div>
-              <h4 className="font-semibold text-sm text-[#211B2B]">{topThree[1].name}</h4>
-              <p className="text-xs text-[#6F687A] line-clamp-1">{topThree[1].college}</p>
-              <div className="mt-2 pt-2 border-t border-[#E8E2EF] flex justify-around text-xs font-medium text-[#211B2B]">
-                <span>{topThree[1].streakDays}d streak</span>
-                <span>{topThree[1].xp.toLocaleString()} XP</span>
-              </div>
-            </div>
-
-            {/* Rank 1 (Gold) */}
-            <div className="order-1 md:order-2 bg-white rounded-2xl border-2 border-[#FFD84D] p-5 text-center shadow-xs">
-              <div className="w-16 h-16 rounded-full bg-[#FFD84D] text-[#211B2B] font-black flex items-center justify-center mx-auto mb-2 text-base shadow-xs">
-                🥇
-              </div>
-              <div className="text-[11px] font-bold uppercase text-[#5425A8] tracking-wider mb-0.5">Top Solver</div>
-              <h4 className="font-bold text-base text-[#211B2B]">{topThree[0].name}</h4>
-              <p className="text-xs text-[#6F687A] line-clamp-1">{topThree[0].college}</p>
-              <div className="mt-3 pt-2.5 border-t border-[#E8E2EF] flex justify-around text-xs font-semibold text-[#211B2B]">
-                <span className="text-[#92400E]">{topThree[0].streakDays} Days</span>
-                <span className="text-[#5425A8]">{topThree[0].xp.toLocaleString()} XP</span>
+            {/* Left: 3D Championship Trophy Art (Span 5) */}
+            <div className="lg:col-span-5 relative rounded-3xl overflow-hidden bg-gradient-to-tr from-[#FAF8FD] to-[#F1E9FF] border border-[#E8E2EF] p-2.5 shadow-sm group">
+              <div className="relative rounded-2xl overflow-hidden bg-white shadow-xs">
+                <img
+                  src="/images/leaderboard-podium.jpg"
+                  alt="DKODER 3D Coding Championship Podium with Golden Trophy and Robot Mascot"
+                  className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-[#E8E2EF] text-[10px] font-bold text-[#5425A8] shadow-xs flex items-center gap-1">
+                  <Trophy className="w-3 h-3 text-[#FFD84D] fill-[#FFD84D]" />
+                  <span>Campus Hall of Fame</span>
+                </div>
               </div>
             </div>
 
-            {/* Rank 3 */}
-            <div className="order-3 bg-[#FAF8FD] rounded-2xl border border-[#E8E2EF] p-4 text-center">
-              <div className="w-14 h-14 rounded-full bg-[#F3EDFF] text-[#5425A8] font-bold flex items-center justify-center mx-auto mb-2 text-sm">
-                #3
+            {/* Right: 3 Tiered Cards (Span 7) */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3.5 items-end">
+              
+              {/* Rank 2 (Silver) */}
+              <div className="bg-[#FAF8FD] rounded-2xl border border-[#E8E2EF] p-4 text-center order-2 sm:order-1">
+                <div className="w-12 h-12 rounded-full bg-slate-200 text-[#211B2B] font-bold flex items-center justify-center mx-auto mb-2 text-xs border border-slate-300">
+                  🥈 #2
+                </div>
+                <h4 className="font-bold text-sm text-[#211B2B]">{topThree[1].name}</h4>
+                <p className="text-[11px] text-[#706879] line-clamp-1">{topThree[1].college}</p>
+                <div className="mt-2.5 pt-2 border-t border-[#E8E2EF] flex justify-around text-xs font-semibold text-[#211B2B]">
+                  <span className="text-[#92400E]">{topThree[1].streakDays}d streak</span>
+                  <span className="text-[#5425A8]">{topThree[1].xp.toLocaleString()} XP</span>
+                </div>
               </div>
-              <h4 className="font-semibold text-sm text-[#211B2B]">{topThree[2].name}</h4>
-              <p className="text-xs text-[#6F687A] line-clamp-1">{topThree[2].college}</p>
-              <div className="mt-2 pt-2 border-t border-[#E8E2EF] flex justify-around text-xs font-medium text-[#211B2B]">
-                <span>{topThree[2].streakDays}d streak</span>
-                <span>{topThree[2].xp.toLocaleString()} XP</span>
+
+              {/* Rank 1 (Gold) */}
+              <div className="bg-white rounded-2xl border-2 border-[#FFD84D] p-5 text-center shadow-md order-1 sm:order-2 relative -translate-y-1 sm:-translate-y-2">
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#5425A8] text-[#FFD84D] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-xs">
+                  <Crown className="w-3 h-3 text-[#FFD84D]" />
+                  <span>Top Solver</span>
+                </div>
+                <div className="w-14 h-14 rounded-full bg-[#FFD84D] text-[#211B2B] font-black flex items-center justify-center mx-auto mb-2 text-base shadow-xs mt-1">
+                  🥇 #1
+                </div>
+                <h4 className="font-extrabold text-base text-[#211B2B]">{topThree[0].name}</h4>
+                <p className="text-xs text-[#706879] line-clamp-1">{topThree[0].college}</p>
+                <div className="mt-3 pt-2.5 border-t border-[#E8E2EF] flex justify-around text-xs font-bold text-[#211B2B]">
+                  <span className="text-[#92400E]">{topThree[0].streakDays} Days</span>
+                  <span className="text-[#5425A8]">{topThree[0].xp.toLocaleString()} XP</span>
+                </div>
               </div>
+
+              {/* Rank 3 (Bronze) */}
+              <div className="bg-[#FAF8FD] rounded-2xl border border-[#E8E2EF] p-4 text-center order-3">
+                <div className="w-12 h-12 rounded-full bg-[#F1E9FF] text-[#5425A8] font-bold flex items-center justify-center mx-auto mb-2 text-xs border border-purple-200">
+                  🥉 #3
+                </div>
+                <h4 className="font-bold text-sm text-[#211B2B]">{topThree[2].name}</h4>
+                <p className="text-[11px] text-[#706879] line-clamp-1">{topThree[2].college}</p>
+                <div className="mt-2.5 pt-2 border-t border-[#E8E2EF] flex justify-around text-xs font-semibold text-[#211B2B]">
+                  <span className="text-[#92400E]">{topThree[2].streakDays}d streak</span>
+                  <span className="text-[#5425A8]">{topThree[2].xp.toLocaleString()} XP</span>
+                </div>
+              </div>
+
             </div>
 
           </div>

@@ -22,17 +22,45 @@ export const InstitutionalBanner: React.FC<InstitutionalBannerProps> = ({ onNavi
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
+        <div className="max-w-2xl mb-8">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1E9FF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
             <GraduationCap className="w-3.5 h-3.5" />
             <span>Institutional TnP Suite</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
-            Batch-level visibility for <span className="text-[#5425A8]">Placement Cells</span>
+            Batch-level visibility for <span className="text-[#5425A8]">Placement Cells & Deans</span>
           </h2>
-          <p className="mt-2 text-sm text-[#6F687A]">
-            Monitor student readiness, track practice metrics, and run company diagnostic tests across departments.
+          <p className="mt-2 text-sm text-[#706879]">
+            Monitor student readiness, track practice metrics, and run company diagnostic tests across engineering departments with real-time analytics.
           </p>
+        </div>
+
+        {/* 3D Institutional Analytics Hero Art Banner */}
+        <div className="mb-8 relative rounded-3xl overflow-hidden bg-gradient-to-tr from-[#FAF8FD] to-[#F1E9FF] border border-[#E8E2EF] p-2.5 shadow-md group">
+          <div className="relative rounded-2xl overflow-hidden bg-white shadow-xs">
+            <img
+              src="/images/institutional-analytics.jpg"
+              alt="DKODER 3D Institutional College Placement Analytics Suite and Campus Dashboard"
+              className="w-full max-h-[420px] object-cover group-hover:scale-101 transition-transform duration-500"
+              loading="lazy"
+            />
+            
+            {/* Floating Overlay Badge: Verified Cohort Placement */}
+            <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-[#E8E2EF] text-xs font-bold text-[#211B2B] shadow-md flex items-center gap-2">
+              <div className="w-6 h-6 rounded-lg bg-[#5425A8] text-white flex items-center justify-center font-bold text-xs">
+                86%
+              </div>
+              <div>
+                <div className="text-[11px] font-bold text-[#211B2B]">Diagnostic Cohort Placed</div>
+                <div className="text-[9px] text-[#706879]">TCS, Infosys & Product Offers</div>
+              </div>
+            </div>
+
+            <div className="absolute top-3 right-3 bg-[#5425A8]/90 text-white backdrop-blur-md px-3 py-1 rounded-xl text-xs font-semibold shadow-md border border-purple-400/30 flex items-center gap-1.5">
+              <BarChart3 className="w-3.5 h-3.5 text-[#FFD84D]" />
+              <span>Multi-Department Live TnP LMS</span>
+            </div>
+          </div>
         </div>
 
         {/* 4 Metric Cards */}

@@ -41,26 +41,39 @@ export const CareerTracks: React.FC<CareerTracksProps> = ({ solvedCount, onNavig
             return (
               <div
                 key={track.id}
-                className="bg-white rounded-2xl border border-[#E8E2EF] p-6 flex flex-col justify-between hover:border-[#5425A8] transition-all duration-150 shadow-xs"
+                className="bg-white rounded-3xl border border-[#E8E2EF] overflow-hidden flex flex-col justify-between hover:border-[#5425A8] hover:shadow-lg transition-all duration-200 group"
               >
                 <div>
-                  {/* Top Row: Package Range & Question Count */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-[#FFF8D6] text-[#211B2B] border border-[#FFD84D]/40">
+                  {/* Track 3D Illustration Header */}
+                  <div className="relative h-48 w-full overflow-hidden bg-[#FAF8FD] border-b border-[#E8E2EF]">
+                    <img
+                      src={
+                        idx === 0 
+                          ? '/images/track-service.jpg' 
+                          : idx === 1 
+                            ? '/images/track-super-dream.jpg' 
+                            : '/images/track-fullstack.jpg'
+                      }
+                      alt={track.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-bold text-[#211B2B] border border-[#E8E2EF] shadow-xs">
                       {track.packageRange}
-                    </span>
-                    <span className="text-xs text-[#6F687A] font-medium">
+                    </div>
+                    <div className="absolute top-3 right-3 bg-[#5425A8]/90 text-white backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold">
                       {track.totalQuestions} Questions
-                    </span>
+                    </div>
                   </div>
 
-                  {/* Title & Subtitle */}
-                  <h3 className="text-lg font-bold text-[#211B2B] mb-1">
-                    {track.title}
-                  </h3>
-                  <p className="text-xs text-[#5425A8] font-medium mb-3">
-                    {track.subtitle}
-                  </p>
+                  <div className="p-6">
+                    {/* Title & Subtitle */}
+                    <h3 className="text-lg font-bold text-[#211B2B] mb-0.5 group-hover:text-[#5425A8] transition-colors">
+                      {track.title}
+                    </h3>
+                    <p className="text-xs text-[#5425A8] font-semibold mb-3">
+                      {track.subtitle}
+                    </p>
 
                   {/* Overview */}
                   <p className="text-xs text-[#6F687A] leading-relaxed mb-4">
@@ -132,21 +145,23 @@ export const CareerTracks: React.FC<CareerTracksProps> = ({ solvedCount, onNavig
                       />
                     </div>
                   </div>
+                  {/* Card CTA */}
+                  <div className="pt-2">
+                    <Button
+                      variant={idx === 0 ? 'primary' : 'outline'}
+                      size="sm"
+                      fullWidth
+                      onClick={() => track.bundleUrl && onNavigate(track.bundleUrl)}
+                      rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+                    >
+                      {track.bundleName || 'Start Track'}
+                    </Button>
+                  </div>
                 </div>
-
-                {/* Card CTA */}
-                <Button
-                  variant={idx === 0 ? 'primary' : 'outline'}
-                  size="sm"
-                  fullWidth
-                  onClick={() => track.bundleUrl && onNavigate(track.bundleUrl)}
-                  rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
-                >
-                  {track.bundleName || 'Start Track'}
-                </Button>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
         </div>
 
       </div>
