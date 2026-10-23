@@ -74,14 +74,16 @@ export function App() {
     return <HomePage onNavigate={handleNavigate} />;
   };
 
+  const isDashboard = currentPath.startsWith('/dashboard');
+
   return (
     <ToastProvider>
       <div className="flex flex-col min-h-screen bg-white text-[#211B2B]">
-        <Navbar currentPath={currentPath} onNavigate={handleNavigate} />
+        {!isDashboard && <Navbar currentPath={currentPath} onNavigate={handleNavigate} />}
         <main className="flex-1">
           {renderCurrentPage()}
         </main>
-        <Footer onNavigate={handleNavigate} />
+        {!isDashboard && <Footer onNavigate={handleNavigate} />}
       </div>
     </ToastProvider>
   );
