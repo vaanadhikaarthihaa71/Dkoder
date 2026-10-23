@@ -91,12 +91,16 @@ export const DailyPath: React.FC<DailyPathProps> = ({ onStartTaskPractice }) => 
     });
   };
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const nextTask = tasks.find((t) => !t.completed) || tasks[0];
+
   return (
     <section className="py-16 sm:py-20 bg-white border-b border-[#E8E2EF]" id="daily-path">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1E9FF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
               <CalendarDays className="w-3.5 h-3.5" />
@@ -106,14 +110,14 @@ export const DailyPath: React.FC<DailyPathProps> = ({ onStartTaskPractice }) => 
               Daily Path: <span className="text-[#5425A8]">4 Habits a Day</span>
             </h2>
             <p className="text-xs sm:text-sm text-[#706879] mt-1">
-              Check off your daily problems to maintain continuous preparation momentum.
+              Maintain continuous preparation momentum with progressive daily milestones.
             </p>
           </div>
 
           <div className="flex items-center gap-2 bg-[#FAF8FD] border border-[#E8E2EF] px-3.5 py-2 rounded-2xl text-xs shadow-xs">
             <Flame className="w-4 h-4 fill-[#FFD84D] text-[#92400E]" />
             <span className="font-bold text-[#211B2B]">14-Day Streak</span>
-            <span className="text-[#706879]">({completedCount}/{totalTasks} Done)</span>
+            <span className="text-[#706879]">({completedCount}/{totalTasks} Completed)</span>
           </div>
         </div>
 
@@ -121,7 +125,7 @@ export const DailyPath: React.FC<DailyPathProps> = ({ onStartTaskPractice }) => 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left Column: Interactive Tasks Checklist (Span 7) */}
-          <div className="lg:col-span-7 space-y-5">
+          <div className="lg:col-span-7 space-y-4">
             
             {/* Progress bar */}
             <div>
@@ -137,28 +141,30 @@ export const DailyPath: React.FC<DailyPathProps> = ({ onStartTaskPractice }) => 
               </div>
             </div>
 
-            {/* Tasks Checklist */}
-            <div className="space-y-2.5">
-              {tasks.map((task) => (
-                <div
-                  key={task.id}
-                  onClick={() => toggleTask(task.id)}
-                  className={`p-3.5 rounded-2xl border transition-all flex items-center justify-between gap-3 cursor-pointer select-none shadow-2xs ${
-                    task.completed
-                      ? 'bg-[#FAF8FD] border-[#E8E2EF] opacity-75'
-                      : 'bg-white border-[#E8E2EF] hover:border-[#5425A8] hover:shadow-xs'
-                  }`}
+            {/* If not expanded: Show only Current Task */}
+            {!isExpanded ? (
+              <div className="bg-[#FAF8FD] rounded-2xl border border-[#E8E2EF] p-4 shadow-2xs">
+                <div className="text-[11px] uppercase font-bold text-[#5425A8] mb-1.5 flex items-center justify-between">
+                  <span>Current Task in Queue</span>
+                  <span className="font-semibold text-[#706879] lowercase">
+                    {isAllComplete ? 'All goals completed' : `task ${completedCount + 1} of ${totalTasks}`}
+                  </span>
+                </div>
+
+                <div 
+                  onClick={() => toggleTask(nextTask.id)}
+                  className="p-3.5 rounded-xl bg-white border border-[#E8E2EF] flex items-center justify-between gap-3 cursor-pointer hover:border-[#5425A8] transition-all"
                 >
                   <div className="flex items-center gap-3">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleTask(task.id);
+                        toggleTask(nextTask.id);
                       }}
                       className="focus:outline-none"
-                      aria-label={task.completed ? 'Mark incomplete' : 'Mark complete'}
+                      aria-label={nextTask.completed ? 'Mark incomplete' : 'Mark complete'}
                     >
-                      {task.completed ? (
+                      {nextTask.completed ? (
                         <CheckCircle2 className="w-5 h-5 text-emerald-600 fill-emerald-100" />
                       ) : (
                         <Circle className="w-5 h-5 text-[#E8E2EF] hover:text-[#5425A8]" />
@@ -168,26 +174,91 @@ export const DailyPath: React.FC<DailyPathProps> = ({ onStartTaskPractice }) => 
                     <div>
                       <span
                         className={`text-xs sm:text-sm font-semibold block ${
-                          task.completed ? 'line-through text-[#706879]' : 'text-[#211B2B]'
+                          nextTask.completed ? 'line-through text-[#706879]' : 'text-[#211B2B]'
                         }`}
                       >
-                        {task.title}
+                        {nextTask.title}
                       </span>
                       <span className="text-[11px] text-[#706879]">
-                        {task.category} • ~{task.estimatedMinutes} mins
+                        {nextTask.category} • ~{nextTask.estimatedMinutes} mins
                       </span>
                     </div>
                   </div>
 
                   <span
                     className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
-                      task.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-[#F1E9FF] text-[#5425A8] border border-purple-100'
+                      nextTask.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-[#F1E9FF] text-[#5425A8]'
                     }`}
                   >
-                    {task.completed ? 'Done' : 'Pending'}
+                    {nextTask.completed ? 'Done' : 'Active'}
                   </span>
                 </div>
-              ))}
+              </div>
+            ) : (
+              /* Expanded: Show Full 4-Task Interactive Checklist */
+              <div className="space-y-2.5 animate-fadeIn">
+                {tasks.map((task) => (
+                  <div
+                    key={task.id}
+                    onClick={() => toggleTask(task.id)}
+                    className={`p-3.5 rounded-2xl border transition-all flex items-center justify-between gap-3 cursor-pointer select-none shadow-2xs ${
+                      task.completed
+                        ? 'bg-[#FAF8FD] border-[#E8E2EF] opacity-75'
+                        : 'bg-white border-[#E8E2EF] hover:border-[#5425A8] hover:shadow-xs'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleTask(task.id);
+                        }}
+                        className="focus:outline-none"
+                        aria-label={task.completed ? 'Mark incomplete' : 'Mark complete'}
+                      >
+                        {task.completed ? (
+                          <CheckCircle2 className="w-5 h-5 text-emerald-600 fill-emerald-100" />
+                        ) : (
+                          <Circle className="w-5 h-5 text-[#E8E2EF] hover:text-[#5425A8]" />
+                        )}
+                      </button>
+
+                      <div>
+                        <span
+                          className={`text-xs sm:text-sm font-semibold block ${
+                            task.completed ? 'line-through text-[#706879]' : 'text-[#211B2B]'
+                          }`}
+                        >
+                          {task.title}
+                        </span>
+                        <span className="text-[11px] text-[#706879]">
+                          {task.category} • ~{task.estimatedMinutes} mins
+                        </span>
+                      </div>
+                    </div>
+
+                    <span
+                      className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                        task.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-[#F1E9FF] text-[#5425A8]'
+                      }`}
+                    >
+                      {task.completed ? 'Done' : 'Pending'}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Expand / Collapse Full Checklist Toggle */}
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-xs font-semibold text-[#5425A8] hover:text-[#401B85] flex items-center gap-1 cursor-pointer"
+              >
+                <span>{isExpanded ? 'Hide Task Queue (Show Current Task)' : `View All ${totalTasks} Tasks in Checklist`}</span>
+                <span className="text-xs">{isExpanded ? '↑' : '↓'}</span>
+              </button>
             </div>
 
             {/* Actions Row */}
@@ -209,12 +280,12 @@ export const DailyPath: React.FC<DailyPathProps> = ({ onStartTaskPractice }) => 
                   onClick={handleResetTasks}
                   leftIcon={<RotateCcw className="w-3 h-3 text-[#706879]" />}
                 >
-                  Reset Today
+                  Reset Checklist
                 </Button>
               </div>
 
               <span className="text-[11px] text-[#706879]">
-                * Progress saved locally in your current browser session.
+                * Progress saved locally in session.
               </span>
             </div>
 

@@ -6,7 +6,9 @@ import {
   CheckCircle2, 
   Target, 
   Layers, 
-  ArrowRight
+  ArrowRight,
+  Info,
+  ChevronDown
 } from 'lucide-react';
 import { Button } from '../common/Button';
 
@@ -16,6 +18,7 @@ interface InstitutionalBannerProps {
 
 export const InstitutionalBanner: React.FC<InstitutionalBannerProps> = ({ onNavigate }) => {
   const [activeCohort, setActiveCohort] = useState<'all' | 'cse' | 'ece'>('all');
+  const [isBreakdownOpen, setIsBreakdownOpen] = useState(false);
 
   return (
     <section className="py-16 sm:py-20 bg-[#FAF8FD] border-b border-[#E8E2EF]" id="institutions">
@@ -30,8 +33,8 @@ export const InstitutionalBanner: React.FC<InstitutionalBannerProps> = ({ onNavi
           <h2 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
             Batch-level visibility for <span className="text-[#5425A8]">Placement Cells & Deans</span>
           </h2>
-          <p className="mt-2 text-sm text-[#706879]">
-            Monitor student readiness, track practice metrics, and run company diagnostic tests across engineering departments with real-time analytics.
+          <p className="mt-1.5 text-xs sm:text-sm text-[#706879]">
+            Real-time readiness dashboards and diagnostic tests across engineering cohorts.
           </p>
         </div>
 
@@ -41,7 +44,7 @@ export const InstitutionalBanner: React.FC<InstitutionalBannerProps> = ({ onNavi
             <img
               src="/images/institutional-analytics.jpg"
               alt="DKODER 3D Institutional College Placement Analytics Suite and Campus Dashboard"
-              className="w-full max-h-[420px] object-cover group-hover:scale-101 transition-transform duration-500"
+              className="w-full max-h-[380px] object-cover group-hover:scale-101 transition-transform duration-500"
               loading="lazy"
             />
             
@@ -52,137 +55,172 @@ export const InstitutionalBanner: React.FC<InstitutionalBannerProps> = ({ onNavi
               </div>
               <div>
                 <div className="text-[11px] font-bold text-[#211B2B]">Diagnostic Cohort Placed</div>
-                <div className="text-[9px] text-[#706879]">TCS, Infosys & Product Offers</div>
+                <div className="text-[9px] text-[#706879]">Sample verification benchmark</div>
               </div>
             </div>
 
             <div className="absolute top-3 right-3 bg-[#5425A8]/90 text-white backdrop-blur-md px-3 py-1 rounded-xl text-xs font-semibold shadow-md border border-purple-400/30 flex items-center gap-1.5">
               <BarChart3 className="w-3.5 h-3.5 text-[#FFD84D]" />
-              <span>Multi-Department Live TnP LMS</span>
+              <span>Multi-Department TnP LMS</span>
             </div>
           </div>
         </div>
 
-        {/* 4 Metric Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {/* 4 Metric Cards with Tooltip Explanations */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           
-          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4">
+          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4 shadow-2xs group relative">
             <div className="flex items-center justify-between text-[#6F687A] text-xs mb-1">
-              <span>Batch Activity</span>
-              <Users2 className="w-4 h-4 text-[#5425A8]" />
+              <span className="font-medium">Batch Activity</span>
+              <div className="flex items-center gap-1">
+                <Users2 className="w-4 h-4 text-[#5425A8]" />
+                <span title="Weekly active students solving mock problems" className="cursor-help text-[#948B9E] hover:text-[#5425A8]">
+                  <Info className="w-3 h-3" />
+                </span>
+              </div>
             </div>
             <div className="text-2xl font-bold text-[#211B2B]">94.2%</div>
-            <div className="text-[11px] text-[#6F687A] mt-0.5">Weekly Active Solvers</div>
+            <div className="text-[11px] text-[#706879] mt-0.5">Active Weekly Solvers</div>
           </div>
 
-          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4">
+          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4 shadow-2xs group relative">
             <div className="flex items-center justify-between text-[#6F687A] text-xs mb-1">
-              <span>Test Completion</span>
-              <CheckCircle2 className="w-4 h-4 text-[#5425A8]" />
+              <span className="font-medium">Test Completion</span>
+              <div className="flex items-center gap-1">
+                <CheckCircle2 className="w-4 h-4 text-[#5425A8]" />
+                <span title="Students clearing timed placement drive cutoffs" className="cursor-help text-[#948B9E] hover:text-[#5425A8]">
+                  <Info className="w-3 h-3" />
+                </span>
+              </div>
             </div>
             <div className="text-2xl font-bold text-[#211B2B]">88.5%</div>
-            <div className="text-[11px] text-[#6F687A] mt-0.5">Mock Drive Cutoffs Met</div>
+            <div className="text-[11px] text-[#706879] mt-0.5">Mock Cutoffs Met</div>
           </div>
 
-          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4">
+          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4 shadow-2xs group relative">
             <div className="flex items-center justify-between text-[#6F687A] text-xs mb-1">
-              <span>Topic Coverage</span>
-              <Layers className="w-4 h-4 text-[#5425A8]" />
+              <span className="font-medium">Topic Coverage</span>
+              <div className="flex items-center gap-1">
+                <Layers className="w-4 h-4 text-[#5425A8]" />
+                <span title="Core syllabus coverage across DSA, DBMS, and Aptitude" className="cursor-help text-[#948B9E] hover:text-[#5425A8]">
+                  <Info className="w-3 h-3" />
+                </span>
+              </div>
             </div>
             <div className="text-2xl font-bold text-[#211B2B]">96.0%</div>
-            <div className="text-[11px] text-[#6F687A] mt-0.5">Core DSA & Aptitude</div>
+            <div className="text-[11px] text-[#706879] mt-0.5">Core Syllabus Covered</div>
           </div>
 
-          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4">
+          <div className="bg-white border border-[#E8E2EF] rounded-xl p-4 shadow-2xs group relative">
             <div className="flex items-center justify-between text-[#6F687A] text-xs mb-1">
-              <span>Readiness Index</span>
-              <Target className="w-4 h-4 text-[#5425A8]" />
+              <span className="font-medium">Readiness Index</span>
+              <div className="flex items-center gap-1">
+                <Target className="w-4 h-4 text-[#5425A8]" />
+                <span title="Students pre-qualified for recruiter assessment drives" className="cursor-help text-[#948B9E] hover:text-[#5425A8]">
+                  <Info className="w-3 h-3" />
+                </span>
+              </div>
             </div>
             <div className="text-2xl font-bold text-[#211B2B]">81.4%</div>
-            <div className="text-[11px] text-[#6F687A] mt-0.5">Company Drive Qualified</div>
+            <div className="text-[11px] text-[#706879] mt-0.5">Drive Qualified</div>
           </div>
 
         </div>
 
-        {/* Dashboard Preview Box */}
-        <div className="bg-white rounded-2xl border border-[#E8E2EF] p-5 sm:p-6 shadow-xs">
+        {/* Dashboard Preview Box with Collapsible Breakdown */}
+        <div className="bg-white rounded-2xl border border-[#E8E2EF] p-4 sm:p-5 shadow-xs">
           
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-[#E8E2EF]">
-            <div>
-              <div className="text-xs font-semibold text-[#5425A8] uppercase tracking-wider">
-                Cohort Readiness Distribution (Sample Data)
-              </div>
-              <h3 className="text-sm font-bold text-[#211B2B] mt-0.5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#E8E2EF]">
+            <div className="flex items-center gap-2">
+              <h3 className="text-sm font-bold text-[#211B2B]">
                 Departmental Qualification by Package Tier
               </h3>
+              <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#F1E9FF] text-[#5425A8]">
+                Sample Cohort Data
+              </span>
             </div>
 
-            {/* Switcher */}
-            <div className="flex items-center gap-1 bg-[#FAF8FD] p-1 rounded-lg border border-[#E8E2EF] text-xs">
-              <button
-                onClick={() => setActiveCohort('all')}
-                className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
-                  activeCohort === 'all' ? 'bg-[#5425A8] text-white font-semibold' : 'text-[#6F687A] hover:text-[#211B2B]'
-                }`}
-              >
-                All Departments
-              </button>
-              <button
-                onClick={() => setActiveCohort('cse')}
-                className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
-                  activeCohort === 'cse' ? 'bg-[#5425A8] text-white font-semibold' : 'text-[#6F687A] hover:text-[#211B2B]'
-                }`}
-              >
-                CSE & IT
-              </button>
-              <button
-                onClick={() => setActiveCohort('ece')}
-                className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
-                  activeCohort === 'ece' ? 'bg-[#5425A8] text-white font-semibold' : 'text-[#6F687A] hover:text-[#211B2B]'
-                }`}
-              >
-                Circuit Branches
-              </button>
-            </div>
+            {/* Toggle Accordion */}
+            <button
+              type="button"
+              onClick={() => setIsBreakdownOpen(!isBreakdownOpen)}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5425A8] hover:text-[#401B85] px-2.5 py-1 rounded-lg hover:bg-[#FAF8FD] transition-colors cursor-pointer"
+            >
+              <span>{isBreakdownOpen ? 'Hide Tier Breakdown' : 'View Tier Breakdown'}</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isBreakdownOpen ? 'rotate-180' : ''}`} />
+            </button>
           </div>
 
-          {/* Clean Progress Bars */}
-          <div className="py-5 space-y-3.5">
-            <div>
-              <div className="flex justify-between text-xs font-medium mb-1">
-                <span className="text-[#211B2B]">Service Track Qualified (TCS Ninja, Infosys SE, Accenture ASE)</span>
-                <span className="font-semibold text-[#5425A8]">92%</span>
+          {/* Expandable Breakdown Content */}
+          {isBreakdownOpen && (
+            <div className="py-4 space-y-4 animate-fadeIn">
+              {/* Branch Filter */}
+              <div className="flex items-center gap-1 bg-[#FAF8FD] p-1 rounded-lg border border-[#E8E2EF] text-xs w-fit">
+                <button
+                  onClick={() => setActiveCohort('all')}
+                  className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
+                    activeCohort === 'all' ? 'bg-[#5425A8] text-white font-semibold' : 'text-[#706879] hover:text-[#211B2B]'
+                  }`}
+                >
+                  All Branches
+                </button>
+                <button
+                  onClick={() => setActiveCohort('cse')}
+                  className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
+                    activeCohort === 'cse' ? 'bg-[#5425A8] text-white font-semibold' : 'text-[#706879] hover:text-[#211B2B]'
+                  }`}
+                >
+                  CSE & IT
+                </button>
+                <button
+                  onClick={() => setActiveCohort('ece')}
+                  className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
+                    activeCohort === 'ece' ? 'bg-[#5425A8] text-white font-semibold' : 'text-[#706879] hover:text-[#211B2B]'
+                  }`}
+                >
+                  Circuit Branches
+                </button>
               </div>
-              <div className="w-full h-2 rounded-full bg-[#E8E2EF] overflow-hidden">
-                <div className="h-full bg-[#5425A8] rounded-full transition-all duration-300" style={{ width: '92%' }} />
-              </div>
-            </div>
 
-            <div>
-              <div className="flex justify-between text-xs font-medium mb-1">
-                <span className="text-[#211B2B]">Differential Tier (TCS Digital, Infy SP, 7-12 LPA)</span>
-                <span className="font-semibold text-[#5425A8]">68%</span>
-              </div>
-              <div className="w-full h-2 rounded-full bg-[#E8E2EF] overflow-hidden">
-                <div className="h-full bg-[#5425A8] rounded-full transition-all duration-300" style={{ width: '68%' }} />
-              </div>
-            </div>
+              {/* Clean Progress Bars */}
+              <div className="space-y-3 pt-1">
+                <div>
+                  <div className="flex justify-between text-xs font-medium mb-1">
+                    <span className="text-[#211B2B]">Service Tier (TCS Ninja, Infosys SE, Accenture ASE)</span>
+                    <span className="font-semibold text-[#5425A8]">92%</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-[#E8E2EF] overflow-hidden">
+                    <div className="h-full bg-[#5425A8] rounded-full transition-all duration-300" style={{ width: '92%' }} />
+                  </div>
+                </div>
 
-            <div>
-              <div className="flex justify-between text-xs font-medium mb-1">
-                <span className="text-[#211B2B]">Super Dream Qualified (Big Tech & Product SDE 18+ LPA)</span>
-                <span className="font-semibold text-[#5425A8]">34%</span>
-              </div>
-              <div className="w-full h-2 rounded-full bg-[#E8E2EF] overflow-hidden">
-                <div className="h-full bg-[#FFD84D] rounded-full transition-all duration-300" style={{ width: '34%' }} />
+                <div>
+                  <div className="flex justify-between text-xs font-medium mb-1">
+                    <span className="text-[#211B2B]">Differential Tier (TCS Digital, Infosys SP, 7-12 LPA)</span>
+                    <span className="font-semibold text-[#5425A8]">68%</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-[#E8E2EF] overflow-hidden">
+                    <div className="h-full bg-[#5425A8] rounded-full transition-all duration-300" style={{ width: '68%' }} />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-xs font-medium mb-1">
+                    <span className="text-[#211B2B]">Super Dream (Product SDE & FinTech 18+ LPA)</span>
+                    <span className="font-semibold text-[#5425A8]">34%</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-[#E8E2EF] overflow-hidden">
+                    <div className="h-full bg-[#FFD84D] rounded-full transition-all duration-300" style={{ width: '34%' }} />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Footer CTAs */}
-          <div className="pt-4 border-t border-[#E8E2EF] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-            <span className="text-[#6F687A]">
-              Interested in LMS deployment for your campus placement drive?
+          <div className="pt-3.5 mt-2 border-t border-[#E8E2EF] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <span className="text-[#706879]">
+              Deploy institutional LMS benchmarks for your campus placement drive.
             </span>
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <Button

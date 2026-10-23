@@ -61,10 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Pill with Robot Mascot Indicator */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F1E9FF] border border-[#E8E2EF] text-[#5425A8] text-xs font-semibold shadow-xs">
               <span className="w-2.5 h-2.5 rounded-full bg-[#FFD84D] animate-pulse" />
-              <span>DKODER AI Coding & Placement Engine</span>
-              <span className="bg-white/80 px-2 py-0.5 rounded-full text-[10px] text-[#211B2B] border border-[#E8E2EF]">
-                v2.6
-              </span>
+              <span>Campus Placement LMS</span>
             </div>
 
             {/* Main Headline */}
@@ -72,24 +69,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               Master campus coding rounds with <span className="text-[#5425A8] underline decoration-[#FFD84D] decoration-4 underline-offset-4">real recruiter questions</span>
             </h1>
 
-            {/* Subtitle */}
+            {/* Concise One-Sentence Subtitle */}
             <p className="text-base sm:text-lg text-[#706879] leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Practice company-pattern questions from TCS, Infosys, and Accenture to 20+ LPA Super Dream roles with in-browser compilation, instant diagnostic scores, and structured preparation roadmaps.
+              Practice company-pattern questions from TCS and Infosys to 20+ LPA Super Dream roles with in-browser compilation.
             </p>
 
             {/* Value checklist */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs sm:text-sm text-[#211B2B] font-medium pt-1">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs sm:text-sm text-[#211B2B] font-medium pt-1">
               <div className="flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-[#5425A8] stroke-[2.5]" />
-                <span>Live Browser Coding Lab</span>
+                <span>Live Code Lab</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-[#5425A8] stroke-[2.5]" />
-                <span>Salary & Package Filters</span>
+                <span>Salary Filters</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-[#5425A8] stroke-[2.5]" />
-                <span>Verified Placement Syllabi</span>
+                <span>Verified Syllabi</span>
               </div>
             </div>
 
@@ -127,8 +124,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Quick interactive placement goal selector */}
             <div className="pt-3 border-t border-[#E8E2EF]/80">
-              <div className="text-[11px] font-semibold text-[#706879] mb-2 text-center lg:text-left">
-                Choose your placement goal to see tailored roadmap:
+              <div className="flex items-center justify-center lg:justify-between text-[11px] font-semibold text-[#706879] mb-2">
+                <span>Select placement target:</span>
               </div>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
                 {DEMO_QUERIES.map((item, idx) => (

@@ -7,15 +7,10 @@ export const RecruiterMarquee: React.FC = () => {
 
   return (
     <section className="bg-[#FAF8FD] py-8 border-b border-[#E8E2EF] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#5425A8]">
-            <Building2 className="w-4 h-4" />
-            <span>Recruitment Pattern Coverage</span>
-          </div>
-          <p className="text-xs text-[#6F687A]">
-            Curated placement question patterns tagged by frequency and hiring drive
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-3">
+        <div className="flex items-center justify-center sm:justify-start gap-2 text-xs font-bold uppercase tracking-wider text-[#5425A8]">
+          <Building2 className="w-4 h-4" />
+          <span>Verified Recruiter Patterns</span>
         </div>
       </div>
 

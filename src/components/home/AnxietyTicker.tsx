@@ -83,7 +83,7 @@ export const AnxietyTicker: React.FC<AnxietyTickerProps> = ({ onNavigateToTrack 
           </div>
 
           {/* Right Column: 6 Interactive Question Cards (Span 8) */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {ANXIETY_QUERIES.map((item) => (
               <button
                 key={item.id}
@@ -94,29 +94,28 @@ export const AnxietyTicker: React.FC<AnxietyTickerProps> = ({ onNavigateToTrack 
                     setSelectedQuery(item);
                   }
                 }}
-                className="text-left p-4.5 rounded-2xl bg-white border border-[#E8E2EF] hover:border-[#5425A8] hover:bg-[#FAF8FD] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#5425A8] cursor-pointer flex flex-col justify-between group shadow-2xs"
+                className="text-left p-3.5 sm:p-4 rounded-xl bg-white border border-[#E8E2EF] hover:border-[#5425A8] hover:bg-[#FAF8FD] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#5425A8] cursor-pointer flex flex-col justify-between group shadow-2xs hover:shadow-xs"
                 aria-haspopup="dialog"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[11px] font-bold text-[#5425A8] bg-[#F1E9FF] px-2.5 py-0.5 rounded-full border border-purple-100">
+                    <span className="text-[10px] font-bold text-[#5425A8] bg-[#F1E9FF] px-2 py-0.5 rounded-md border border-purple-100">
                       {item.category}
                     </span>
-                    <ChevronRight className="w-4 h-4 text-[#706879] group-hover:text-[#5425A8] group-hover:translate-x-0.5 transition-all" />
+                    <span className="text-[10px] text-[#706879] group-hover:text-[#5425A8] transition-colors flex items-center gap-0.5">
+                      <span>View</span>
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </span>
                   </div>
 
-                  <h3 className="text-sm font-bold text-[#211B2B] group-hover:text-[#5425A8] transition-colors mb-1.5 leading-snug">
+                  <h3 className="text-xs sm:text-sm font-bold text-[#211B2B] group-hover:text-[#5425A8] transition-colors leading-snug">
                     {item.question}
                   </h3>
-
-                  <p className="text-xs text-[#706879] line-clamp-2 leading-relaxed">
-                    {item.shortAnswer}
-                  </p>
                 </div>
 
-                <div className="mt-4 pt-2.5 border-t border-[#E8E2EF] flex items-center justify-between text-xs font-semibold text-[#5425A8]">
-                  <span>Action roadmap →</span>
-                  <span className="text-[11px] text-[#706879] font-normal">{item.recommendedTrack}</span>
+                <div className="mt-3 pt-2 border-t border-[#E8E2EF] flex items-center justify-between text-[11px] text-[#706879]">
+                  <span className="font-medium text-[#5425A8] group-hover:underline">Action Roadmap →</span>
+                  <span>{item.recommendedTrack}</span>
                 </div>
               </button>
             ))}

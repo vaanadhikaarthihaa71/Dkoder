@@ -4,13 +4,15 @@ import {
   Trophy, 
   Flame, 
   Search, 
-  Crown 
+  Crown,
+  ChevronDown
 } from 'lucide-react';
 
 export const Leaderboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'xp' | 'active' | 'hard'>('xp');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCollege, setSelectedCollege] = useState('All');
+  const [expandedStudentId, setExpandedStudentId] = useState<string | null>(null);
 
   const collegesList = ['All', 'Anna University', 'VIT Vellore', 'PSG College', 'SRM', 'NIT Trichy', 'BITS Pilani'];
 
@@ -34,7 +36,10 @@ export const Leaderboard: React.FC = () => {
   });
 
   const topThree = sortedStudents.slice(0, 3);
-  const maxXP = Math.max(...STUDENT_RANKINGS.map(s => s.xp));
+
+  const toggleExpand = (id: string) => {
+    setExpandedStudentId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <section className="py-16 sm:py-20 bg-white border-b border-[#E8E2EF]" id="leaderboard">
@@ -180,40 +185,118 @@ export const Leaderboard: React.FC = () => {
 
         </div>
 
-        {/* Ranking Table */}
-        <div className="bg-white rounded-xl border border-[#E8E2EF] overflow-hidden">
+        {/* Ranking Table with Progressive Disclosure */}
+        <div className="bg-white rounded-xl border border-[#E8E2EF] overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead className="bg-[#FAF8FD] text-[#6F687A] uppercase text-[10px] font-semibold tracking-wider border-b border-[#E8E2EF]">
                 <tr>
-                  <th className="py-2.5 px-4 w-12">Rank</th>
+                  <th className="py-2.5 px-4 w-12 text-center">Rank</th>
                   <th className="py-2.5 px-4">Student</th>
-                  <th className="py-2.5 px-4 hidden md:table-cell">Institution</th>
-                  <th className="py-2.5 px-4 text-center">Streak</th>
                   <th className="py-2.5 px-4 text-right">Placement XP</th>
+                  <th className="py-2.5 px-4 text-center w-24">Breakdown</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E8E2EF]">
-                {sortedStudents.map((student, idx) => (
-                  <tr key={student.id} className="hover:bg-[#FAF8FD]">
-                    <td className="py-2.5 px-4 font-semibold text-[#211B2B]">
-                      {idx + 1}
-                    </td>
-                    <td className="py-2.5 px-4 font-medium text-[#211B2B]">
-                      {student.name}
-                      <span className="block md:hidden text-[11px] text-[#6F687A]">{student.college}</span>
-                    </td>
-                    <td className="py-2.5 px-4 text-[#6F687A] hidden md:table-cell">
-                      {student.college}
-                    </td>
-                    <td className="py-2.5 px-4 text-center font-medium text-[#92400E]">
-                      {student.streakDays}d
-                    </td>
-                    <td className="py-2.5 px-4 text-right font-semibold text-[#211B2B]">
-                      {student.xp.toLocaleString()} XP
-                    </td>
-                  </tr>
-                ))}
+                {sortedStudents.map((student, idx) => {
+                  const isExpanded = expandedStudentId === student.id;
+                  return (
+                    <React.Fragment key={student.id}>
+                      <tr 
+                        onClick={() => toggleExpand(student.id)}
+                        className={`hover:bg-[#FAF8FD] transition-colors cursor-pointer ${isExpanded ? 'bg-[#FAF8FD]/80' : ''}`}
+                      >
+                        <td className="py-3 px-4 font-bold text-[#211B2B] text-center">
+                          {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : idx + 1}
+                        </td>
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-2.5">
+                            <img
+                              src={student.avatarUrl}
+                              alt={student.name}
+                              className="w-7 h-7 rounded-full object-cover border border-[#E8E2EF]"
+                            />
+                            <div>
+                              <div className="font-semibold text-[#211B2B] text-xs flex items-center gap-1.5">
+                                <span>{student.name}</span>
+                                {student.badge && (
+                                  <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-medium bg-[#F3EDFF] text-[#5425A8]">
+                                    {student.badge}
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-[11px] text-[#706879] line-clamp-1">{student.college}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4 text-right">
+                          <span className="font-bold text-[#5425A8] text-xs">
+                            {student.xp.toLocaleString()} XP
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleExpand(student.id);
+                            }}
+                            className="inline-flex items-center gap-1 text-[11px] font-medium text-[#706879] hover:text-[#5425A8] px-2 py-1 rounded hover:bg-white border border-transparent hover:border-[#E8E2EF] transition-all cursor-pointer"
+                            aria-expanded={isExpanded}
+                          >
+                            <span>{isExpanded ? 'Hide' : 'Stats'}</span>
+                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-[#5425A8]' : ''}`} />
+                          </button>
+                        </td>
+                      </tr>
+
+                      {/* Expandable Details Panel */}
+                      {isExpanded && (
+                        <tr className="bg-[#FAF8FD]/90 border-b border-[#E8E2EF]">
+                          <td colSpan={4} className="p-3 sm:p-4">
+                            <div className="bg-white rounded-xl border border-[#E8E2EF] p-3 sm:p-4 shadow-2xs animate-fadeIn">
+                              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#E8E2EF]">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-bold text-[#211B2B]">{student.name}’s Performance Record</span>
+                                  {student.badge && (
+                                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#FFD84D]/30 text-[#92400E]">
+                                      {student.badge}
+                                    </span>
+                                  )}
+                                </div>
+                                <span className="text-[11px] text-[#706879]">
+                                  Affiliation: <strong className="text-[#211B2B] font-medium">{student.college}</strong>
+                                </span>
+                              </div>
+
+                              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3">
+                                <div className="p-2.5 rounded-lg bg-[#FAF8FD] border border-[#E8E2EF]">
+                                  <div className="text-[10px] uppercase font-semibold text-[#706879]">Total Solved</div>
+                                  <div className="text-sm font-bold text-[#211B2B] mt-0.5">{student.questionsSolved} Problems</div>
+                                </div>
+                                <div className="p-2.5 rounded-lg bg-[#FAF8FD] border border-[#E8E2EF]">
+                                  <div className="text-[10px] uppercase font-semibold text-[#706879]">Daily Streak</div>
+                                  <div className="text-sm font-bold text-[#92400E] flex items-center gap-1 mt-0.5">
+                                    <Flame className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
+                                    <span>{student.streakDays} Consecutive Days</span>
+                                  </div>
+                                </div>
+                                <div className="p-2.5 rounded-lg bg-[#FAF8FD] border border-[#E8E2EF]">
+                                  <div className="text-[10px] uppercase font-semibold text-[#706879]">Hard DSA Solved</div>
+                                  <div className="text-sm font-bold text-[#5425A8] mt-0.5">{student.hardSolved} Solved</div>
+                                </div>
+                                <div className="p-2.5 rounded-lg bg-[#FAF8FD] border border-[#E8E2EF]">
+                                  <div className="text-[10px] uppercase font-semibold text-[#706879]">Cohort Rank</div>
+                                  <div className="text-sm font-bold text-[#059669] mt-0.5">Top {Math.max(1, Math.round((idx + 1) * 2))}% Campus</div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </tbody>
             </table>
           </div>

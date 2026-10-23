@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Code2, 
   MapPin, 
   Mail, 
   Phone, 
-  MessageCircle, 
-  ShieldCheck
+  ShieldCheck,
+  ChevronDown
 } from 'lucide-react';
 import { COMPANY_INFO } from '../../data/mockData';
 
@@ -14,25 +14,31 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const toggleSection = (section: string) => {
+    setOpenSection((prev) => (prev === section ? null : section));
+  };
+
   return (
     <footer className="bg-[#211B2B] text-white border-t border-[#371275]">
       
       {/* Platform Standards Strip */}
-      <div className="border-b border-white/10 py-3 px-4">
+      <div className="border-b border-white/10 py-2.5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#E8E2EF]">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#FFD84D]" />
-            <span className="font-semibold text-white">DKODER Placement Standards:</span>
+            <span className="font-semibold text-white">DKODER Standards:</span>
             <span>Verified company placement patterns & in-browser compilation</span>
           </div>
           <span className="text-[11px] text-[#A89FB5]">
-            Engineered for Engineering Colleges Across India
+            Engineered for Indian Engineering Colleges
           </span>
         </div>
       </div>
 
       {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
           {/* Brand & Address Column (Span 2) */}
@@ -47,11 +53,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
 
             <p className="text-xs text-[#A89FB5] leading-relaxed max-w-sm">
-              The placement learning management system built for engineering institutions. Practice verified placement questions with live compilers, salary filters, and batch analytics.
+              Placement preparation LMS for engineering colleges. Real company questions, in-browser compilation, and cohort readiness analytics.
             </p>
 
             {/* Address & Contacts */}
-            <div className="pt-2 space-y-2 text-xs text-[#E8E2EF]">
+            <div className="pt-1 space-y-1.5 text-xs text-[#E8E2EF]">
               <div className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#FFD84D] shrink-0 mt-0.5" />
                 <span>{COMPANY_INFO.address}</span>
@@ -78,44 +84,59 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           {/* Column 1: For Students */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#FFD84D] mb-3">
-              For Students
-            </h4>
-            <ul className="space-y-2 text-xs text-[#A89FB5]">
-              <li><button onClick={() => onNavigate('/')} className="hover:text-white transition-colors text-left">Practice Question Bank</button></li>
-              <li><button onClick={() => onNavigate('/dashboard')} className="hover:text-white transition-colors text-left">Student Dashboard</button></li>
-              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left">Subscription Plans</button></li>
-              <li><button onClick={() => onNavigate('/hackathons')} className="hover:text-white transition-colors text-left">Campus Hackathons</button></li>
-              <li><button onClick={() => onNavigate('/#daily-path')} className="hover:text-white transition-colors text-left">Daily Checklist</button></li>
+          <div className="border-b md:border-b-0 border-white/10 pb-3 md:pb-0">
+            <button
+              type="button"
+              onClick={() => toggleSection('students')}
+              className="w-full flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-[#FFD84D] mb-2 md:mb-3 cursor-pointer"
+            >
+              <span>For Students</span>
+              <ChevronDown className={`w-3.5 h-3.5 md:hidden transition-transform ${openSection === 'students' ? 'rotate-180' : ''}`} />
+            </button>
+            <ul className={`space-y-2 text-xs text-[#A89FB5] ${openSection === 'students' ? 'block' : 'hidden md:block'}`}>
+              <li><button onClick={() => onNavigate('/')} className="hover:text-white transition-colors text-left cursor-pointer">Practice Question Bank</button></li>
+              <li><button onClick={() => onNavigate('/dashboard')} className="hover:text-white transition-colors text-left cursor-pointer">Student Dashboard</button></li>
+              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left cursor-pointer">Subscription Plans</button></li>
+              <li><button onClick={() => onNavigate('/hackathons')} className="hover:text-white transition-colors text-left cursor-pointer">Campus Hackathons</button></li>
+              <li><button onClick={() => onNavigate('/#daily-path')} className="hover:text-white transition-colors text-left cursor-pointer">Daily Habits</button></li>
             </ul>
           </div>
 
           {/* Column 2: For Institutions */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#FFD84D] mb-3">
-              For Institutions
-            </h4>
-            <ul className="space-y-2 text-xs text-[#A89FB5]">
-              <li><button onClick={() => onNavigate('/colleges')} className="hover:text-white transition-colors text-left">College Placement LMS</button></li>
-              <li><button onClick={() => onNavigate('/partner-mou')} className="hover:text-white transition-colors text-left text-white font-medium">Apply for Campus MOU</button></li>
-              <li><button onClick={() => onNavigate('/colleges')} className="hover:text-white transition-colors text-left">Batch Analytics Suite</button></li>
-              <li><button onClick={() => onNavigate('/colleges')} className="hover:text-white transition-colors text-left">Custom Mock Drives</button></li>
+          <div className="border-b md:border-b-0 border-white/10 pb-3 md:pb-0">
+            <button
+              type="button"
+              onClick={() => toggleSection('institutions')}
+              className="w-full flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-[#FFD84D] mb-2 md:mb-3 cursor-pointer"
+            >
+              <span>For Institutions</span>
+              <ChevronDown className={`w-3.5 h-3.5 md:hidden transition-transform ${openSection === 'institutions' ? 'rotate-180' : ''}`} />
+            </button>
+            <ul className={`space-y-2 text-xs text-[#A89FB5] ${openSection === 'institutions' ? 'block' : 'hidden md:block'}`}>
+              <li><button onClick={() => onNavigate('/colleges')} className="hover:text-white transition-colors text-left cursor-pointer">College Placement LMS</button></li>
+              <li><button onClick={() => onNavigate('/partner-mou')} className="hover:text-white transition-colors text-left text-white font-medium cursor-pointer">Apply for Campus MOU</button></li>
+              <li><button onClick={() => onNavigate('/colleges')} className="hover:text-white transition-colors text-left cursor-pointer">Batch Analytics Suite</button></li>
+              <li><button onClick={() => onNavigate('/colleges')} className="hover:text-white transition-colors text-left cursor-pointer">Custom Mock Drives</button></li>
               <li><a href={`mailto:${COMPANY_INFO.email}?subject=College%20Partnership`} className="hover:text-white transition-colors">Placement Enquiries</a></li>
             </ul>
           </div>
 
           {/* Column 3: Programmes */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#FFD84D] mb-3">
-              Programmes
-            </h4>
-            <ul className="space-y-2 text-xs text-[#A89FB5]">
-              <li><button onClick={() => onNavigate('/bundles/infosys')} className="hover:text-white transition-colors text-left">Infosys InfyTQ Prep</button></li>
-              <li><button onClick={() => onNavigate('/bundles/accenture')} className="hover:text-white transition-colors text-left">Accenture Fast-Track</button></li>
-              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left">TCS NQT Preparation</button></li>
-              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left">Big Tech SDE Sprint</button></li>
-              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left text-[#FFD84D] font-medium">Super Dream Pack</button></li>
+          <div className="border-b md:border-b-0 border-white/10 pb-3 md:pb-0">
+            <button
+              type="button"
+              onClick={() => toggleSection('programmes')}
+              className="w-full flex items-center justify-between text-left text-xs font-bold uppercase tracking-wider text-[#FFD84D] mb-2 md:mb-3 cursor-pointer"
+            >
+              <span>Programmes</span>
+              <ChevronDown className={`w-3.5 h-3.5 md:hidden transition-transform ${openSection === 'programmes' ? 'rotate-180' : ''}`} />
+            </button>
+            <ul className={`space-y-2 text-xs text-[#A89FB5] ${openSection === 'programmes' ? 'block' : 'hidden md:block'}`}>
+              <li><button onClick={() => onNavigate('/bundles/infosys')} className="hover:text-white transition-colors text-left cursor-pointer">Infosys InfyTQ Prep</button></li>
+              <li><button onClick={() => onNavigate('/bundles/accenture')} className="hover:text-white transition-colors text-left cursor-pointer">Accenture Fast-Track</button></li>
+              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left cursor-pointer">TCS NQT Preparation</button></li>
+              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left cursor-pointer">Big Tech SDE Sprint</button></li>
+              <li><button onClick={() => onNavigate('/student/subscription')} className="hover:text-white transition-colors text-left text-[#FFD84D] font-medium cursor-pointer">Super Dream Pack</button></li>
             </ul>
           </div>
 

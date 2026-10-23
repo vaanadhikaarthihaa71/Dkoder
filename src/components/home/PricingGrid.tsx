@@ -4,7 +4,8 @@ import { PricingPlan } from '../../types';
 import { 
   Check, 
   Sparkles, 
-  GraduationCap
+  GraduationCap,
+  ChevronDown
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { Modal } from '../common/Modal';
@@ -19,6 +20,11 @@ export const PricingGrid: React.FC<PricingGridProps> = ({ onNavigate }) => {
   const [selectedPlanForCheckout, setSelectedPlanForCheckout] = useState<PricingPlan | null>(null);
   const [couponCode, setCouponCode] = useState('CAMPUS2026');
   const [couponApplied, setCouponApplied] = useState(false);
+  const [expandedPlans, setExpandedPlans] = useState<Record<string, boolean>>({});
+
+  const togglePlanFeatures = (planId: string) => {
+    setExpandedPlans((prev) => ({ ...prev, [planId]: !prev[planId] }));
+  };
 
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,30 +59,33 @@ export const PricingGrid: React.FC<PricingGridProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-3">
             <span>Student Subscriptions</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
             Transparent, student-friendly <span className="text-[#5425A8]">annual pricing</span>
           </h2>
-          <p className="mt-2 text-sm text-[#6F687A]">
-            Priced at ₹2 to ₹9 per day. Full access to real questions, salary filters, and AI report cards.
+          <p className="mt-2 text-sm text-[#706879]">
+            Priced from ₹2 to ₹9 per day. Full access to real questions, salary filters, and AI report cards.
           </p>
         </div>
 
-        {/* 5-Plan Directly Comparable Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        {/* 5-Plan Directly Comparable Cards with Progressive Disclosure */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-start">
           {PRICING_PLANS.map((plan) => {
             const isRecommended = plan.name === 'Platinum';
+            const isExpanded = !!expandedPlans[plan.id];
+            const initialFeatures = plan.features.slice(0, 3);
+            const remainingFeatures = plan.features.slice(3);
 
             return (
               <div
                 key={plan.id}
                 className={`bg-white rounded-2xl p-5 flex flex-col justify-between transition-all duration-150 relative ${
                   isRecommended
-                    ? 'border-2 border-[#5425A8] shadow-sm'
-                    : 'border border-[#E8E2EF] hover:border-[#D4CBDF]'
+                    ? 'border-2 border-[#5425A8] shadow-md ring-2 ring-[#5425A8]/10'
+                    : 'border border-[#E8E2EF] hover:border-[#D4CBDF] shadow-xs'
                 }`}
               >
                 {isRecommended && (
@@ -95,36 +104,60 @@ export const PricingGrid: React.FC<PricingGridProps> = ({ onNavigate }) => {
                       {plan.name === 'Bronze' ? '🥉' : plan.name === 'Silver' ? '🥈' : plan.name === 'Gold' ? '🥇' : plan.name === 'Platinum' ? '💎' : '🚀'}
                     </span>
                   </div>
-                  <p className="text-xs text-[#706879] mt-0.5 min-h-[30px] leading-relaxed">
+                  <p className="text-xs text-[#706879] mt-0.5 line-clamp-2 leading-relaxed">
                     {plan.tagline}
                   </p>
 
-                  {/* Price */}
+                  {/* Price & Billing */}
                   <div className="my-3 pb-3 border-b border-[#E8E2EF]">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-2xl font-extrabold text-[#211B2B]">₹{plan.annualPrice}</span>
-                      <span className="text-xs text-[#6F687A]">/ yr</span>
+                      <span className="text-2xl font-black text-[#211B2B]">₹{plan.annualPrice}</span>
+                      <span className="text-xs text-[#706879]">/ yr</span>
                     </div>
                     <div className="text-[11px] font-semibold text-[#5425A8] mt-0.5">
-                      ~₹{plan.dailyCost} per day
+                      ~₹{plan.dailyCost} per day • 365d access
                     </div>
                   </div>
 
-                  {/* Target level */}
-                  <div className="text-[11px] text-[#6F687A] bg-[#FAF8FD] p-2 rounded-lg border border-[#E8E2EF] mb-3">
-                    <strong className="text-[#211B2B] block">Target:</strong>
-                    {plan.targetAudience}
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-1.5 mb-5 text-xs">
-                    {plan.features.map((feat, fIdx) => (
+                  {/* Initial Key Features (3 items) */}
+                  <div className="space-y-2 mb-3 text-xs">
+                    {initialFeatures.map((feat, fIdx) => (
                       <div key={fIdx} className="flex items-start gap-2">
                         <Check className="w-3.5 h-3.5 text-[#5425A8] shrink-0 mt-0.5 stroke-[2.5]" />
-                        <span className="text-[#211B2B] leading-tight">{feat}</span>
+                        <span className="text-[#211B2B] leading-tight font-medium">{feat}</span>
                       </div>
                     ))}
                   </div>
+
+                  {/* Expandable Features & Target Audience */}
+                  {isExpanded && (
+                    <div className="pt-2 pb-1 border-t border-dashed border-[#E8E2EF] space-y-2 animate-fadeIn">
+                      {remainingFeatures.map((feat, fIdx) => (
+                        <div key={fIdx} className="flex items-start gap-2 text-xs">
+                          <Check className="w-3.5 h-3.5 text-[#059669] shrink-0 mt-0.5 stroke-[2.5]" />
+                          <span className="text-[#211B2B] leading-tight">{feat}</span>
+                        </div>
+                      ))}
+
+                      {/* Target level detail */}
+                      <div className="text-[11px] text-[#706879] bg-[#FAF8FD] p-2 rounded-lg border border-[#E8E2EF] mt-2">
+                        <strong className="text-[#211B2B] block mb-0.5">Recommended for:</strong>
+                        {plan.targetAudience}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Show All Features Control */}
+                  {remainingFeatures.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => togglePlanFeatures(plan.id)}
+                      className="w-full py-1 text-center text-[11px] font-semibold text-[#5425A8] hover:text-[#401B85] flex items-center justify-center gap-1 mb-4 hover:underline cursor-pointer"
+                    >
+                      <span>{isExpanded ? 'Show Key Features Only' : `Show All ${plan.features.length} Features`}</span>
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                    </button>
+                  )}
                 </div>
 
                 {/* Actions */}
@@ -140,7 +173,7 @@ export const PricingGrid: React.FC<PricingGridProps> = ({ onNavigate }) => {
 
                   <button
                     onClick={() => onNavigate('/partner-mou')}
-                    className="w-full text-center text-[11px] text-[#6F687A] hover:text-[#5425A8] py-0.5 cursor-pointer"
+                    className="w-full text-center text-[11px] text-[#706879] hover:text-[#5425A8] py-0.5 cursor-pointer"
                   >
                     Campus MOU / Scholarship →
                   </button>
