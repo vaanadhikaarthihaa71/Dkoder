@@ -6,10 +6,10 @@ import { FilterToolbar, FilterState } from '../components/home/FilterToolbar';
 import { QuestionStream } from '../components/home/QuestionStream';
 import { CodingLabModal } from '../components/home/CodingLabModal';
 import { CareerTracks } from '../components/home/CareerTracks';
-import { DailyPath } from '../components/home/DailyPath';
-import { InstitutionalBanner } from '../components/home/InstitutionalBanner';
 import { Leaderboard } from '../components/home/Leaderboard';
 import { PricingGrid } from '../components/home/PricingGrid';
+import { DailyPath } from '../components/home/DailyPath';
+import { InstitutionalBanner } from '../components/home/InstitutionalBanner';
 import { MOCK_QUESTIONS } from '../data/mockData';
 import { Question } from '../types';
 import { useToast } from '../context/ToastContext';
@@ -41,28 +41,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     addToast({
       type: 'info',
       title: 'Filters Reset',
-      description: 'Showing all curated placement practice questions.'
+      description: 'Showing all curated placement questions.'
     });
   };
 
   // Filter logic
   const filteredQuestions = MOCK_QUESTIONS.filter((q) => {
-    // 1. Company
     if (filters.company !== 'All' && q.company !== filters.company) return false;
-
-    // 2. Package Range
     if (filters.packageRange !== 'All' && q.packageCategory !== filters.packageRange) return false;
-
-    // 3. Difficulty
     if (filters.difficulty !== 'All' && q.difficulty !== filters.difficulty) return false;
-
-    // 4. Mode
     if (filters.mode === 'Core Coding' && q.format !== 'Coding') return false;
     if (filters.mode === 'MCQ & Tech' && q.format !== 'MCQ') return false;
     if (filters.mode === 'Aptitude' && !q.topicTags.includes('Aptitude')) return false;
     if (filters.mode === 'System Design' && !q.topicTags.includes('System Design')) return false;
 
-    // 5. Search query
     if (filters.searchQuery.trim()) {
       const qText = filters.searchQuery.toLowerCase();
       const matchTitle = q.title.toLowerCase().includes(qText);
@@ -81,8 +73,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     setSelectedQuestion(random);
     addToast({
       type: 'success',
-      title: '🎲 Surprise Question Picked!',
-      description: `Opened: "${random.title}" (${random.company} • ${random.difficulty})`
+      title: 'Surprise Question Picked',
+      description: `Opened: "${random.title}" (${random.company})`
     });
   };
 
@@ -96,35 +88,33 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       
-      {/* 1. Hero Section */}
+      {/* 1. Spacious Hero Section */}
       <HeroSection
         onStartPracticing={scrollToQuestions}
         onExploreBundles={() => onNavigate('/bundles/infosys')}
         onApplyMou={() => onNavigate('/partner-mou')}
       />
 
-      {/* 2. Recruiter Logo Marquee */}
+      {/* 2. Recruiter Section */}
       <RecruiterMarquee />
 
-      {/* 3. Student Anxiety Ticker & Tag Cloud */}
+      {/* 3. Student Preparation Challenges & Quick-Start Options */}
       <AnxietyTicker 
-        onNavigateToTrack={() => {
-          scrollToQuestions();
-        }} 
+        onNavigateToTrack={() => scrollToQuestions()} 
       />
 
-      {/* 4. Question Stream & Filter Toolbar Section */}
-      <section className="py-16 bg-[#FAF8FF] border-b border-purple-100" id="practice-stream">
+      {/* 4. Practice Filters and Well-Organized Question List */}
+      <section className="py-16 sm:py-20 bg-[#FAF8FD] border-b border-[#E8E2EF]" id="practice-stream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-950 tracking-tight">
-              Dynamic Practice Stream & <span className="text-yellow-600">Company Filters</span>
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
+              Targeted practice with <span className="text-[#5425A8]">granular filters</span>
             </h2>
-            <p className="mt-3 text-base text-purple-800/80">
-              Filter by recruiter, salary package, or difficulty. Launch the live in-browser compiler directly on any card.
+            <p className="mt-2 text-sm text-[#6F687A]">
+              Filter by company, salary package range, or difficulty. Launch in-browser code compilation on any card.
             </p>
           </div>
 
@@ -147,31 +137,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 5. Career Track Breakdown Cards */}
+      {/* 5. Career Preparation Tracks */}
       <CareerTracks
         solvedCount={solvedQuestionIds.size}
         onNavigate={onNavigate}
       />
 
-      {/* 6. Daily Path Interactive Checklist */}
-      <DailyPath
-        onStartTaskPractice={() => scrollToQuestions()}
-      />
-
-      {/* 7. Institutional Placement LMS Analytics Banner */}
-      <InstitutionalBanner
-        onNavigate={onNavigate}
-      />
-
-      {/* 8. Campus Leaderboard Dashboard */}
+      {/* 6. Leaderboard Preview */}
       <Leaderboard />
 
-      {/* 9. Pricing & Subscription Grid */}
+      {/* 7. Pricing Comparison */}
       <PricingGrid
         onNavigate={onNavigate}
       />
 
-      {/* Live Coding Lab Modal */}
+      {/* 8. Daily Preparation Checklist */}
+      <DailyPath
+        onStartTaskPractice={() => scrollToQuestions()}
+      />
+
+      {/* 9. Institutional Analytics and Enquiry CTA */}
+      <InstitutionalBanner
+        onNavigate={onNavigate}
+      />
+
+      {/* Live Coding Lab / Practice Modal */}
       <CodingLabModal
         question={selectedQuestion}
         isOpen={!!selectedQuestion}

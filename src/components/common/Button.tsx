@@ -21,23 +21,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   disabled,
   ...props
 }, ref) => {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none disabled:active:scale-100 cursor-pointer';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none cursor-pointer select-none';
 
   const sizeStyles = {
-    sm: 'text-xs px-3.5 py-1.5 gap-1.5',
-    md: 'text-sm px-5 py-2.5 gap-2',
-    lg: 'text-base px-6 py-3.5 gap-2.5',
+    sm: 'text-xs px-3 py-1.5 gap-1.5 h-8',
+    md: 'text-sm px-4 py-2 gap-2 h-10',
+    lg: 'text-sm sm:text-base px-6 py-2.5 gap-2.5 h-12',
   };
 
   const variantStyles = {
-    // Bold sunshine yellow with dark text
-    primary: 'bg-yellow-400 text-purple-950 hover:bg-yellow-300 hover:shadow-lg hover:shadow-yellow-400/25 focus:ring-yellow-400 border border-yellow-300',
-    // Rich royal purple secondary with white/yellow accents
-    secondary: 'bg-purple-900 text-white hover:bg-purple-800 hover:shadow-lg hover:shadow-purple-900/20 focus:ring-purple-700 border border-purple-800',
-    // Outline with purple border
-    outline: 'border-2 border-purple-300 text-purple-900 hover:bg-purple-50 hover:border-purple-600 focus:ring-purple-400 bg-transparent',
+    // Primary Yellow with dark text
+    primary: 'bg-[#FFD84D] text-[#211B2B] hover:bg-[#F2C836] focus:ring-[#FFD84D] shadow-sm',
+    // Deep Purple with white text
+    secondary: 'bg-[#5425A8] text-white hover:bg-[#461C8E] focus:ring-[#5425A8] shadow-sm',
+    // Clean outline with subtle lavender hover
+    outline: 'border border-[#E8E2EF] text-[#211B2B] bg-white hover:bg-[#F3EDFF] hover:border-[#D4CBDF] focus:ring-[#5425A8]',
     // Ghost
-    ghost: 'text-purple-900 hover:bg-purple-100/60 focus:ring-purple-400 bg-transparent',
+    ghost: 'text-[#211B2B] hover:bg-[#F3EDFF] focus:ring-[#5425A8] bg-transparent',
     // Danger
     danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
   };
@@ -56,7 +56,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
       {...props}
     >
       {isLoading ? (
-        <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
+        <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-1.5" />
       ) : leftIcon ? (
         <span className="shrink-0">{leftIcon}</span>
       ) : null}

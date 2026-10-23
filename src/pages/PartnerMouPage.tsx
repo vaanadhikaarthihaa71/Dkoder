@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import { 
   FileCheck2, 
-  Building2, 
-  GraduationCap, 
   CheckCircle2, 
   Download, 
   Send, 
-  ShieldCheck, 
-  Sparkles,
-  Phone,
-  Mail,
-  HelpCircle
+  Phone, 
+  Mail 
 } from 'lucide-react';
 import { Button } from '../components/common/Button';
 import { Modal } from '../components/common/Modal';
@@ -34,8 +29,7 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
     targetBatch: '2026 Graduating Batch',
     studentCount: '850',
     needsLabIntegration: true,
-    needsAptitudeDrills: true,
-    agreeToTerms: true
+    needsAptitudeDrills: true
   });
 
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -47,7 +41,7 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
       addToast({
         type: 'error',
         title: 'Missing Required Fields',
-        description: 'Please complete all required fields marked with *.'
+        description: 'Please complete all required fields.'
       });
       return;
     }
@@ -57,118 +51,99 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
     setIsSuccessModalOpen(true);
     addToast({
       type: 'success',
-      title: 'MOU Application Submitted!',
-      description: `Application Reference: ${generatedId}. We have dispatched a confirmation email to ${formData.officialEmail}.`
+      title: 'MOU Application Submitted',
+      description: `Reference ID: ${generatedId}`
     });
   };
 
   const handleDownloadReceipt = () => {
     addToast({
       type: 'success',
-      title: 'Acknowledgement Slip Generated',
-      description: `Official MOU Docket for ${formData.institutionName} (${submissionId}) downloaded.`
+      title: 'Acknowledgement Slip Saved',
+      description: `MOU Reference Slip for ${formData.institutionName} downloaded.`
     });
   };
 
   return (
-    <div className="py-12 bg-[#FAF8FF] min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-12 bg-[#FAF8FD] min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Breadcrumb */}
-        <div className="text-xs text-purple-700 font-semibold mb-6 flex items-center gap-2">
-          <button onClick={() => onNavigate('/')} className="hover:text-purple-950">Home</button>
+        <div className="text-xs text-[#6F687A] font-medium flex items-center gap-1.5">
+          <button onClick={() => onNavigate('/')} className="hover:text-[#211B2B]">Home</button>
           <span>/</span>
-          <span className="text-purple-950 font-bold">Institutional Partner MOU</span>
+          <span className="text-[#211B2B] font-semibold">Institutional Partner MOU</span>
         </div>
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-100 text-yellow-950 text-xs font-bold uppercase tracking-wider mb-3 border border-yellow-300">
-            <FileCheck2 className="w-3.5 h-3.5 text-yellow-600" />
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
+            <FileCheck2 className="w-3.5 h-3.5" />
             <span>Academic Partnership Framework</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-purple-950 tracking-tight">
-            Apply for Institutional <span className="text-yellow-600">Placement MOU</span>
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#211B2B] tracking-tight">
+            Apply for Institutional <span className="text-[#5425A8]">Placement MOU</span>
           </h1>
-          <p className="mt-3 text-base text-purple-800/80">
-            Formalize an official training partnership with DKODER. Provide your engineering students with subsidized LMS access and TnP placement analytics.
+          <p className="mt-2 text-sm text-[#6F687A]">
+            Subsidized LMS access, faculty cohort dashboards, and sponsored campus hackathons for your students.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Column: MOU Benefits & Guidelines (Span 5) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-gradient-to-b from-purple-900 via-purple-950 to-purple-900 text-white rounded-3xl p-7 shadow-xl border border-purple-800">
-              <h3 className="text-xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
-                <Sparkles className="w-5 h-5" />
+          {/* Left: MOU Privileges */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="bg-white rounded-2xl border border-[#E8E2EF] p-6 shadow-xs">
+              <h3 className="text-base font-bold text-[#211B2B] mb-3">
                 MOU Partner Privileges
               </h3>
 
-              <div className="space-y-3.5 text-xs sm:text-sm text-purple-100">
+              <div className="space-y-3 text-xs text-[#6F687A] leading-relaxed">
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
-                  <span><strong>Subsidized LMS Subscriptions:</strong> Up to 60% fee waiver for bulk student onboarding via campus budget.</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#5425A8] shrink-0 mt-0.5" />
+                  <span><strong>Subsidized LMS Subscriptions:</strong> Up to 60% fee waiver for bulk student enrollment via campus budget.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
-                  <span><strong>TnP Faculty Admin Portal:</strong> Dedicated logins for placement coordinators to track daily solving and batch metrics.</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#5425A8] shrink-0 mt-0.5" />
+                  <span><strong>TnP Faculty Admin Portal:</strong> Dedicated logins for coordinators to track daily practice volume and weak topics.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
-                  <span><strong>Sponsored Collegiate Hackathons:</strong> Platform-managed inter and intra-college coding hackathons with trophies and prize pools.</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#5425A8] shrink-0 mt-0.5" />
+                  <span><strong>Sponsored Collegiate Hackathons:</strong> Platform-managed coding contests with verified scoring criteria.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
-                  <span><strong>Direct Placement Cell Referrals:</strong> Priority candidate recommendations to participating tech recruiters.</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#5425A8] shrink-0 mt-0.5" />
+                  <span><strong>Recruiter Benchmarking:</strong> Pre-season candidate readiness reports for visiting corporate recruiters.</span>
                 </div>
-              </div>
-
-              <div className="mt-6 pt-5 border-t border-purple-800/80 text-xs text-purple-200">
-                <p>
-                  Official partnerships are executed between your institution's Principal / Dean / TPO and <strong>{COMPANY_INFO.legalName}</strong>.
-                </p>
               </div>
             </div>
 
-            {/* Direct Support Contacts */}
-            <div className="bg-white rounded-3xl border-2 border-purple-200 p-6 shadow-sm space-y-3 text-xs text-purple-900">
-              <h4 className="font-bold uppercase tracking-wider text-purple-950 text-[11px]">
-                Need Immediate Partnership Assistance?
-              </h4>
-              <p className="text-purple-700">
-                Contact our Institutional Relations Desk:
-              </p>
-              <div className="space-y-2 pt-1 font-semibold">
-                <div className="flex items-center gap-2 text-purple-950">
-                  <Mail className="w-4 h-4 text-yellow-600" />
-                  <span>{COMPANY_INFO.email}</span>
-                </div>
-                <div className="flex items-center gap-2 text-purple-950">
-                  <Phone className="w-4 h-4 text-yellow-600" />
-                  <span>{COMPANY_INFO.phone}</span>
-                </div>
+            <div className="bg-white rounded-2xl border border-[#E8E2EF] p-5 shadow-xs text-xs text-[#6F687A] space-y-2">
+              <div className="font-semibold text-[#211B2B]">Institutional Partnership Desk:</div>
+              <div className="flex items-center gap-2 text-[#211B2B]">
+                <Mail className="w-3.5 h-3.5 text-[#5425A8]" />
+                <span>{COMPANY_INFO.email}</span>
+              </div>
+              <div className="flex items-center gap-2 text-[#211B2B]">
+                <Phone className="w-3.5 h-3.5 text-[#5425A8]" />
+                <span>{COMPANY_INFO.phone}</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Formal Application Form (Span 7) */}
+          {/* Right: Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl border-2 border-purple-200/90 p-6 sm:p-8 shadow-xl">
-              <div className="pb-4 mb-6 border-b border-purple-100">
-                <h3 className="text-xl font-bold text-purple-950">
-                  Campus MOU Application Form
-                </h3>
-                <p className="text-xs text-purple-700/80 mt-0.5">
-                  All fields are reviewed by the DKODER Academic Advisory Board.
-                </p>
-              </div>
+            <div className="bg-white rounded-2xl border border-[#E8E2EF] p-6 shadow-xs">
+              <h3 className="text-base font-bold text-[#211B2B] mb-1">
+                College MOU Application
+              </h3>
+              <p className="text-xs text-[#6F687A] mb-4">
+                Please provide official institutional details below.
+              </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                
-                {/* 1. Institution Name */}
+              <form onSubmit={handleSubmit} className="space-y-3.5">
                 <div>
-                  <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                     College / University Name *
                   </label>
                   <input
@@ -177,20 +152,19 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
                     placeholder="e.g. Government College of Technology, Coimbatore"
                     value={formData.institutionName}
                     onChange={(e) => setFormData({ ...formData, institutionName: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
                   />
                 </div>
 
-                {/* State & NIRF Ranking Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                       State / Union Territory *
                     </label>
                     <select
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer"
+                      className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs text-[#211B2B] bg-white focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
                     >
                       <option>Tamil Nadu</option>
                       <option>Karnataka</option>
@@ -203,27 +177,25 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                       NIRF / NAAC Status
                     </label>
                     <select
                       value={formData.nirfRank}
                       onChange={(e) => setFormData({ ...formData, nirfRank: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer"
+                      className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs text-[#211B2B] bg-white focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
                     >
                       <option>NIRF Top 100 Engineering</option>
                       <option>NIRF 101 - 200</option>
                       <option>NAAC A++ / A+ Accredited</option>
-                      <option>Affiliated State University Campus</option>
                       <option>Autonomous Engineering College</option>
                     </select>
                   </div>
                 </div>
 
-                {/* Contact Person & Designation */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                       Authorised Contact Person *
                     </label>
                     <input
@@ -232,12 +204,12 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
                       placeholder="Dr. K. Senthil Kumar"
                       value={formData.contactPerson}
                       onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                      className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                       Designation *
                     </label>
                     <input
@@ -245,30 +217,29 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
                       required
                       value={formData.designation}
                       onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                      className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
                     />
                   </div>
                 </div>
 
-                {/* Email & Phone */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                       Official Institutional Email *
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="tpo@gct.ac.in"
+                      placeholder="placement@college.edu.in"
                       value={formData.officialEmail}
                       onChange={(e) => setFormData({ ...formData, officialEmail: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                      className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
-                      Contact Phone / WhatsApp *
+                    <label className="block text-xs font-semibold text-[#211B2B] mb-1">
+                      Contact Phone *
                     </label>
                     <input
                       type="tel"
@@ -276,74 +247,22 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
                       placeholder="+91 94432 10987"
                       value={formData.contactPhone}
                       onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                      className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
                     />
                   </div>
                 </div>
 
-                {/* Batch details */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
-                      Target Placement Cohort
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.targetBatch}
-                      onChange={(e) => setFormData({ ...formData, targetBatch: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
-                      Expected Student Count
-                    </label>
-                    <input
-                      type="number"
-                      value={formData.studentCount}
-                      onChange={(e) => setFormData({ ...formData, studentCount: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    />
-                  </div>
-                </div>
-
-                {/* Checkbox Options */}
-                <div className="space-y-2 pt-2 text-xs text-purple-900">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.needsLabIntegration}
-                      onChange={(e) => setFormData({ ...formData, needsLabIntegration: e.target.checked })}
-                      className="rounded border-purple-300 text-yellow-500 focus:ring-yellow-400"
-                    />
-                    <span>Request on-campus coding lab setup and compiler integration support</span>
-                  </label>
-
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.needsAptitudeDrills}
-                      onChange={(e) => setFormData({ ...formData, needsAptitudeDrills: e.target.checked })}
-                      className="rounded border-purple-300 text-yellow-500 focus:ring-yellow-400"
-                    />
-                    <span>Include TCS NQT & Infosys InfyTQ specialized diagnostic mock series</span>
-                  </label>
-                </div>
-
-                <div className="pt-4">
+                <div className="pt-2">
                   <Button
                     type="submit"
                     variant="primary"
-                    size="lg"
+                    size="md"
                     fullWidth
-                    leftIcon={<Send className="w-4 h-4" />}
-                    className="font-bold text-base shadow-lg shadow-yellow-400/25"
+                    leftIcon={<Send className="w-3.5 h-3.5" />}
                   >
-                    Submit Official MOU Application
+                    Submit MOU Application
                   </Button>
                 </div>
-
               </form>
             </div>
           </div>
@@ -357,38 +276,31 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
         <Modal
           isOpen={isSuccessModalOpen}
           onClose={() => setIsSuccessModalOpen(false)}
-          title="MOU Application Received"
+          title="Application Received"
           subtitle={`Reference ID: ${submissionId}`}
           maxWidth="md"
         >
-          <div className="space-y-4 text-center">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8" />
+          <div className="space-y-3 text-center">
+            <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-6 h-6" />
             </div>
 
-            <h4 className="text-lg font-bold text-purple-950">
-              Thank You, {formData.contactPerson}
+            <h4 className="text-base font-bold text-[#211B2B]">
+              Thank you, {formData.contactPerson}
             </h4>
 
-            <p className="text-xs text-purple-800 leading-relaxed">
-              Your MOU Application for <strong>{formData.institutionName}</strong> has been logged into the DKODER institutional queue. Our Academic Partnerships Director will reach out to schedule the MoU signing review.
+            <p className="text-xs text-[#6F687A] leading-relaxed">
+              Your MOU request for <strong>{formData.institutionName}</strong> has been logged. Our Institutional Academic team will review and get in touch.
             </p>
 
-            <div className="p-3 rounded-xl bg-purple-50 text-xs text-purple-900 font-mono text-left border border-purple-100">
-              <div>Institution: {formData.institutionName}</div>
-              <div>Batch Size: {formData.studentCount} Students</div>
-              <div>Contact: {formData.officialEmail}</div>
-              <div>Status: Under Review (Est. 24-48 hrs)</div>
-            </div>
-
-            <div className="pt-2 flex flex-col sm:flex-row gap-2 justify-center">
+            <div className="pt-2 flex items-center justify-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleDownloadReceipt}
-                leftIcon={<Download className="w-4 h-4" />}
+                leftIcon={<Download className="w-3.5 h-3.5" />}
               >
-                Download MOU Docket
+                Download Slip
               </Button>
               <Button
                 variant="primary"
@@ -397,7 +309,6 @@ export const PartnerMouPage: React.FC<PartnerMouPageProps> = ({ onNavigate }) =>
                   setIsSuccessModalOpen(false);
                   onNavigate('/');
                 }}
-                className="font-bold"
               >
                 Return to Home
               </Button>

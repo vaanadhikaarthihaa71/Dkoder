@@ -4,16 +4,10 @@ import {
   Send, 
   RotateCcw, 
   CheckCircle2, 
-  XCircle, 
-  Sparkles, 
   Clock, 
-  Code2, 
-  Building2, 
-  HelpCircle,
-  Lightbulb,
-  Check,
-  Terminal,
-  Zap
+  Terminal, 
+  Check, 
+  Lightbulb 
 } from 'lucide-react';
 import { Question } from '../../types';
 import { Modal } from '../common/Modal';
@@ -65,33 +59,33 @@ export const CodingLabModal: React.FC<CodingLabModalProps> = ({
     setTimeout(() => {
       setIsRunning(false);
       setOutputConsole(
-        `✓ Compilation successful (0.04s)\n✓ Test Case 1: PASSED (Expected: ${question.sampleOutput || 'Valid'}, Received: ${question.sampleOutput || 'Valid'})\n✓ Memory: 14.2 MB | Runtime: 28 ms\nReady for full evaluation.`
+        `✓ Compilation successful (0.04s)\n✓ Test Case 1: PASSED (Expected: ${question.sampleOutput || 'Valid'}, Received: ${question.sampleOutput || 'Valid'})\n✓ Memory: 14.2 MB | Runtime: 28 ms`
       );
       addToast({
         type: 'info',
         title: 'Sample Tests Passed',
-        description: 'Your solution produced the expected output on sample inputs.'
+        description: 'Your solution matched sample outputs.'
       });
-    }, 1000);
+    }, 800);
   };
 
   const handleSubmitSolution = () => {
     setIsSubmitting(true);
-    setOutputConsole('Evaluating against 18 hidden test cases (including boundary edge cases)...');
+    setOutputConsole('Evaluating against hidden test cases...');
 
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSolved(true);
       setOutputConsole(
-        `🎉 VERDICT: ACCEPTED\n✓ 18/18 Test cases passed\n✓ Runtime: 32 ms (Beats 89.4% of submissions)\n✓ Memory: 15.1 MB (Beats 92.1% of submissions)\n+50 XP awarded to your DKODER placement profile!`
+        `🎉 VERDICT: ACCEPTED\n✓ 18/18 Test cases passed\n✓ Runtime: 32 ms\n✓ Memory: 15.1 MB\n+50 XP recorded locally!`
       );
       onSuccessSolved(question.id);
       addToast({
         type: 'success',
         title: 'Problem Solved! (+50 XP)',
-        description: `Great job! "${question.title}" has been recorded in your local practice log.`
+        description: `"${question.title}" recorded in your local practice log.`
       });
-    }, 1500);
+    }, 1200);
   };
 
   const handleMcqSubmit = () => {
@@ -106,13 +100,13 @@ export const CodingLabModal: React.FC<CodingLabModalProps> = ({
       addToast({
         type: 'success',
         title: 'Correct Answer! (+30 XP)',
-        description: 'Your conceptual understanding is sharp!'
+        description: 'Answer validated successfully.'
       });
     } else {
       addToast({
         type: 'error',
-        title: 'Incorrect Answer',
-        description: 'Review the detailed explanation below to strengthen this concept.'
+        title: 'Incorrect Option',
+        description: 'Check the explanation below to clarify the concept.'
       });
     }
   };
@@ -134,107 +128,102 @@ export const CodingLabModal: React.FC<CodingLabModalProps> = ({
             variant={
               question.difficulty === 'Easy' ? 'green' : question.difficulty === 'Medium' ? 'amber' : 'purple'
             }
+            size="sm"
           >
             {question.difficulty}
           </Badge>
-          <Badge variant="yellow">{question.format}</Badge>
-          <Badge variant="outline-purple">{question.company}</Badge>
-          <span className="text-xs text-purple-600 font-semibold flex items-center gap-1 ml-auto">
+          <Badge variant="outline" size="sm">{question.format}</Badge>
+          <Badge variant="purple" size="sm">{question.company}</Badge>
+          <span className="text-xs text-[#6F687A] flex items-center gap-1 ml-auto">
             <Clock className="w-3.5 h-3.5" />
-            Est. {question.estimatedMinutes} mins
+            {question.estimatedMinutes} mins
           </span>
         </div>
       }
       subtitle={question.title}
       maxWidth="4xl"
     >
-      <div className="space-y-6">
+      <div className="space-y-4">
         
-        {/* Topic Tags & Package Range */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-purple-900">Topic Tags:</span>
+        {/* Topic Tags */}
+        <div className="flex flex-wrap items-center gap-1.5 text-xs">
+          <span className="font-semibold text-[#6F687A]">Topics:</span>
           {question.topicTags.map((tag) => (
-            <span key={tag} className="text-xs px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 font-medium">
+            <span key={tag} className="px-2 py-0.5 rounded-md bg-[#FAF8FD] text-[#211B2B] border border-[#E8E2EF] text-[11px]">
               {tag}
             </span>
           ))}
-          <span className="text-xs font-semibold text-yellow-800 bg-yellow-300 px-2.5 py-0.5 rounded-full ml-auto">
+          <span className="ml-auto font-medium text-[#5425A8] bg-[#F3EDFF] px-2 py-0.5 rounded-md text-[11px]">
             Target: {question.packageCategory}
           </span>
         </div>
 
         {/* Problem Description */}
-        <div className="p-4 rounded-xl bg-purple-50/60 border border-purple-200">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-purple-900 mb-2">
+        <div className="p-3.5 rounded-xl bg-[#FAF8FD] border border-[#E8E2EF]">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#6F687A] mb-1.5">
             Problem Statement
-          </h4>
-          <p className="text-sm text-purple-950 leading-relaxed font-normal">
+          </div>
+          <p className="text-xs sm:text-sm text-[#211B2B] leading-relaxed">
             {question.description}
           </p>
 
           {question.sampleInput && (
-            <div className="mt-3 pt-3 border-t border-purple-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
-              <div className="p-2.5 rounded-lg bg-white border border-purple-100">
-                <span className="text-[10px] uppercase font-bold text-purple-400 block mb-1">Sample Input</span>
-                <span className="text-purple-950">{question.sampleInput}</span>
+            <div className="mt-3 pt-3 border-t border-[#E8E2EF] grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+              <div className="p-2 rounded bg-white border border-[#E8E2EF]">
+                <span className="text-[10px] text-[#6F687A] uppercase block">Input:</span>
+                <span className="text-[#211B2B]">{question.sampleInput}</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-white border border-purple-100">
-                <span className="text-[10px] uppercase font-bold text-purple-400 block mb-1">Sample Output</span>
-                <span className="text-purple-950 font-bold">{question.sampleOutput}</span>
+              <div className="p-2 rounded bg-white border border-[#E8E2EF]">
+                <span className="text-[10px] text-[#6F687A] uppercase block">Output:</span>
+                <span className="text-[#211B2B] font-semibold">{question.sampleOutput}</span>
               </div>
             </div>
           )}
         </div>
 
-        {/* Coding Mode Interface */}
+        {/* Coding Mode */}
         {question.format === 'Coding' && (
-          <div className="space-y-3">
-            {/* Toolbar: Language selector & Actions */}
-            <div className="flex items-center justify-between gap-2 bg-purple-950 text-white p-2.5 rounded-t-xl">
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between bg-[#211B2B] text-white px-3 py-1.5 rounded-t-xl text-xs">
               <div className="flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-yellow-400" />
-                <span className="text-xs font-bold text-purple-200">DKODER Code Lab:</span>
+                <Terminal className="w-3.5 h-3.5 text-[#FFD84D]" />
+                <span className="font-semibold">Compiler:</span>
                 <select
                   value={selectedLang}
                   onChange={(e) => setSelectedLang(e.target.value as any)}
-                  className="bg-purple-900 text-yellow-300 text-xs font-bold px-2.5 py-1 rounded-lg border border-purple-700 focus:outline-none focus:ring-1 focus:ring-yellow-400 cursor-pointer"
+                  className="bg-[#371275] text-[#FFD84D] text-xs font-semibold px-2 py-0.5 rounded border border-[#5425A8] cursor-pointer"
                 >
                   <option value="python">Python 3.11</option>
-                  <option value="java">Java 17 (OpenJDK)</option>
-                  <option value="cpp">C++ 20 (GCC)</option>
+                  <option value="java">Java 17</option>
+                  <option value="cpp">C++ 20</option>
                 </select>
               </div>
 
               <button
                 onClick={handleResetCode}
-                className="text-xs text-purple-300 hover:text-white flex items-center gap-1 p-1 hover:bg-purple-900 rounded transition-colors"
-                title="Reset code template"
+                className="text-[11px] text-[#E8E2EF] hover:text-white flex items-center gap-1 cursor-pointer"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3 h-3" />
                 <span>Reset</span>
               </button>
             </div>
 
-            {/* Code Editor Simulation */}
-            <div className="relative">
-              <textarea
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                rows={10}
-                className="w-full font-mono text-xs sm:text-sm bg-[#1e1b4b] text-yellow-100 p-4 rounded-b-xl border-x border-b border-purple-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 resize-y leading-relaxed"
-                spellCheck={false}
-              />
-            </div>
+            <textarea
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              rows={8}
+              className="w-full font-mono text-xs bg-[#211B2B] text-[#FFF8D6] p-3 rounded-b-xl border border-[#371275] focus:outline-none focus:ring-1 focus:ring-[#FFD84D] resize-y leading-relaxed"
+              spellCheck={false}
+            />
 
-            {/* Run & Submit Action Row */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
               <div className="flex items-center gap-2">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleRunCode}
                   isLoading={isRunning}
-                  leftIcon={<Play className="w-3.5 h-3.5 text-purple-800" />}
+                  leftIcon={<Play className="w-3 h-3 text-[#5425A8]" />}
                 >
                   Run Sample Tests
                 </Button>
@@ -244,53 +233,49 @@ export const CodingLabModal: React.FC<CodingLabModalProps> = ({
                   size="sm"
                   onClick={handleSubmitSolution}
                   isLoading={isSubmitting}
-                  leftIcon={<Send className="w-3.5 h-3.5" />}
-                  className="font-bold shadow"
+                  leftIcon={<Send className="w-3 h-3" />}
                 >
                   Submit Solution
                 </Button>
               </div>
 
               {isSolved && (
-                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>Verified & Solved locally</span>
-                </div>
+                <span className="text-xs font-semibold text-emerald-700 flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  Verified Solution
+                </span>
               )}
             </div>
 
-            {/* Simulated Console Output */}
             {outputConsole && (
-              <div className="p-3.5 rounded-xl bg-purple-950 text-xs font-mono text-purple-200 border border-purple-800 space-y-1">
-                <div className="text-[10px] uppercase font-bold text-yellow-400 tracking-wider">
-                  Terminal Verdict
-                </div>
-                <pre className="whitespace-pre-wrap leading-relaxed">{outputConsole}</pre>
+              <div className="p-3 rounded-xl bg-[#211B2B] text-xs font-mono text-[#F3EDFF] border border-[#5425A8]">
+                <div className="text-[10px] uppercase font-bold text-[#FFD84D] mb-1">Execution Output</div>
+                <pre className="whitespace-pre-wrap">{outputConsole}</pre>
               </div>
             )}
           </div>
         )}
 
-        {/* MCQ Mode Interface */}
+        {/* MCQ Mode */}
         {question.format === 'MCQ' && question.mcqOptions && (
-          <div className="space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-purple-900">
-              Select the Correct Option:
-            </h4>
+          <div className="space-y-3">
+            <div className="text-xs font-semibold text-[#6F687A] uppercase">
+              Select Answer:
+            </div>
 
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {question.mcqOptions.map((opt) => {
                 const isSelected = selectedMcqOption === opt.id;
-                let optBorder = 'border-purple-200 hover:border-purple-400 bg-white';
+                let optStyle = 'border-[#E8E2EF] hover:border-[#5425A8] bg-white';
                 
                 if (isMcqSubmitted) {
                   if (opt.isCorrect) {
-                    optBorder = 'border-emerald-500 bg-emerald-50 text-emerald-950 font-bold';
+                    optStyle = 'border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold';
                   } else if (isSelected && !opt.isCorrect) {
-                    optBorder = 'border-red-500 bg-red-50 text-red-950';
+                    optStyle = 'border-red-400 bg-red-50 text-red-950';
                   }
                 } else if (isSelected) {
-                  optBorder = 'border-yellow-400 bg-yellow-50 text-purple-950 font-bold shadow-sm';
+                  optStyle = 'border-[#5425A8] bg-[#F3EDFF] text-[#211B2B] font-semibold';
                 }
 
                 return (
@@ -298,16 +283,12 @@ export const CodingLabModal: React.FC<CodingLabModalProps> = ({
                     key={opt.id}
                     onClick={() => !isMcqSubmitted && setSelectedMcqOption(opt.id)}
                     disabled={isMcqSubmitted}
-                    className={`w-full text-left p-3.5 rounded-xl border-2 transition-all flex items-start gap-3 text-xs sm:text-sm cursor-pointer ${optBorder}`}
+                    className={`w-full text-left p-3 rounded-xl border text-xs flex items-start gap-2.5 cursor-pointer transition-all ${optStyle}`}
                   >
-                    <span className="w-5 h-5 rounded-full border-2 border-current flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
-                      {isMcqSubmitted && opt.isCorrect ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      ) : (
-                        opt.id.slice(-1).toUpperCase()
-                      )}
+                    <span className="w-4 h-4 rounded-full border border-current flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold">
+                      {isMcqSubmitted && opt.isCorrect ? <Check className="w-3 h-3 text-emerald-600" /> : opt.id.slice(-1).toUpperCase()}
                     </span>
-                    <span className="flex-1 font-mono">{opt.text}</span>
+                    <span className="font-mono flex-1">{opt.text}</span>
                   </button>
                 );
               })}
@@ -316,39 +297,35 @@ export const CodingLabModal: React.FC<CodingLabModalProps> = ({
             {!isMcqSubmitted ? (
               <Button
                 variant="primary"
-                size="md"
+                size="sm"
                 onClick={handleMcqSubmit}
                 disabled={!selectedMcqOption}
-                leftIcon={<CheckCircle2 className="w-4 h-4" />}
-                className="font-bold"
               >
                 Submit Answer
               </Button>
             ) : (
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    setIsMcqSubmitted(false);
-                    setSelectedMcqOption(null);
-                  }}
-                >
-                  Try Again
-                </Button>
-              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setIsMcqSubmitted(false);
+                  setSelectedMcqOption(null);
+                }}
+              >
+                Try Again
+              </Button>
             )}
           </div>
         )}
 
-        {/* Official Placement Editorial & Explanation */}
+        {/* Editorial Explanation */}
         {(isSolved || isMcqSubmitted) && (
-          <div className="p-4 rounded-xl bg-yellow-50 border border-yellow-200 text-xs space-y-2">
-            <div className="font-bold text-amber-950 flex items-center gap-1.5 uppercase tracking-wide">
-              <Lightbulb className="w-4 h-4 text-amber-600" />
-              <span>Editorial Analysis & Complexity</span>
+          <div className="p-3.5 rounded-xl bg-[#FFF8D6] border border-[#FFD84D]/40 text-xs text-[#211B2B] space-y-1">
+            <div className="font-semibold text-[#92400E] flex items-center gap-1.5 uppercase tracking-wide text-[11px]">
+              <Lightbulb className="w-3.5 h-3.5" />
+              <span>Editorial Notes & Complexity</span>
             </div>
-            <p className="text-amber-900 leading-relaxed font-medium">
+            <p className="leading-relaxed font-medium">
               {question.explanation}
             </p>
           </div>

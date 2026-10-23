@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  Question, 
-  Difficulty, 
-  CompanyTag, 
-  PackageRange, 
-  PrepMode 
+  Question 
 } from '../../types';
 import { Badge } from '../common/Badge';
 import { Button } from '../common/Button';
@@ -13,11 +9,8 @@ import {
   Users, 
   CheckCircle2, 
   ArrowRight, 
-  Sparkles, 
   FilterX, 
-  ArrowUpDown,
-  BookOpen,
-  Code2
+  ArrowUpDown
 } from 'lucide-react';
 
 interface QuestionStreamProps {
@@ -38,131 +31,123 @@ export const QuestionStream: React.FC<QuestionStreamProps> = ({
   const sortedQuestions = [...questions].sort((a, b) => {
     if (sortBy === 'time-asc') return a.estimatedMinutes - b.estimatedMinutes;
     if (sortBy === 'solvers-desc') return b.solversCount - a.solversCount;
-    return 0; // recommended default
+    return 0;
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       
-      {/* Stream Controls Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-purple-950 flex items-center gap-2">
-            <span>Verified Practice Stream</span>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-yellow-400 text-purple-950">
-              Live Bank
-            </span>
-          </h3>
-          <p className="text-xs text-purple-700/80 mt-0.5">
-            Sample placement questions curated for engineering recruitment patterns
-          </p>
-        </div>
+      {/* Stream Controls */}
+      <div className="flex items-center justify-between gap-4">
+        <h3 className="text-lg font-bold text-[#211B2B]">
+          Practice Question Vault
+        </h3>
 
         {/* Sort Selector */}
-        <div className="flex items-center gap-2">
-          <ArrowUpDown className="w-3.5 h-3.5 text-purple-500" />
-          <span className="text-xs font-bold text-purple-900">Sort By:</span>
+        <div className="flex items-center gap-1.5 text-xs">
+          <ArrowUpDown className="w-3.5 h-3.5 text-[#6F687A]" />
+          <span className="text-[#6F687A] hidden sm:inline">Sort:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-purple-200 bg-white text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer"
+            className="text-xs px-2.5 py-1 rounded-lg border border-[#E8E2EF] bg-white text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8] cursor-pointer"
           >
-            <option value="recommended">Placement Relevance</option>
-            <option value="time-asc">Fastest First (Minutes)</option>
-            <option value="solvers-desc">Most Solved by Students</option>
+            <option value="recommended">Recommended</option>
+            <option value="time-asc">Estimated Time</option>
+            <option value="solvers-desc">Most Solved</option>
           </select>
         </div>
       </div>
 
-      {/* Empty State when no questions match filters */}
+      {/* Empty State */}
       {sortedQuestions.length === 0 ? (
-        <div className="bg-white rounded-2xl border-2 border-dashed border-purple-200 p-12 text-center max-w-md mx-auto space-y-4">
-          <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto">
-            <FilterX className="w-6 h-6" />
+        <div className="bg-white rounded-2xl border border-dashed border-[#E8E2EF] p-10 text-center max-w-md mx-auto space-y-3">
+          <div className="w-10 h-10 rounded-full bg-[#FAF8FD] text-[#6F687A] flex items-center justify-center mx-auto">
+            <FilterX className="w-5 h-5" />
           </div>
           <div>
-            <h4 className="text-lg font-bold text-purple-950">No Questions Match These Filters</h4>
-            <p className="text-xs text-purple-700 mt-1">
-              Try adjusting your company, package range, or preparation mode to expand results.
+            <h4 className="text-base font-semibold text-[#211B2B]">No Matching Questions Found</h4>
+            <p className="text-xs text-[#6F687A] mt-0.5">
+              Adjust company, salary tier, or mode filters to view available problems.
             </p>
           </div>
           <Button
             variant="primary"
             size="sm"
             onClick={onResetFilters}
-            className="font-bold"
           >
             Reset All Filters
           </Button>
         </div>
       ) : (
-        /* Questions Cards Grid */
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        /* Question Cards Grid */
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {sortedQuestions.map((q) => {
             const isSolved = solvedIds.has(q.id);
 
             return (
               <div
                 key={q.id}
-                className={`group rounded-2xl border transition-all duration-200 p-5 flex flex-col justify-between ${
+                className={`bg-white rounded-xl border p-4 flex flex-col justify-between transition-all duration-150 ${
                   isSolved
-                    ? 'bg-purple-50/70 border-emerald-300/80 shadow-sm'
-                    : 'bg-white border-purple-200/90 hover:border-yellow-400 hover:shadow-xl hover:shadow-purple-900/5'
+                    ? 'border-[#A7F3D0] bg-[#FAFDFB]'
+                    : 'border-[#E8E2EF] hover:border-[#5425A8] hover:shadow-xs'
                 }`}
               >
                 <div>
-                  {/* Top Badges Row */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  {/* Top Badges */}
+                  <div className="flex items-center justify-between gap-2 mb-2">
                     <div className="flex items-center gap-1.5">
                       <Badge
                         variant={
                           q.difficulty === 'Easy' ? 'green' : q.difficulty === 'Medium' ? 'amber' : 'purple'
                         }
+                        size="sm"
                       >
                         {q.difficulty}
                       </Badge>
-                      <Badge variant="yellow">{q.format}</Badge>
-                      <Badge variant="outline-purple">{q.company}</Badge>
+                      <Badge variant="outline" size="sm">{q.format}</Badge>
+                      <Badge variant="purple" size="sm">{q.company}</Badge>
                     </div>
 
-                    <span className="text-[11px] font-bold text-yellow-800 bg-yellow-100/90 px-2 py-0.5 rounded-full border border-yellow-200">
+                    <span className="text-[11px] font-medium text-[#6F687A]">
                       {q.packageCategory}
                     </span>
                   </div>
 
-                  {/* Question Title */}
-                  <h4 className="text-base font-bold text-purple-950 group-hover:text-purple-700 transition-colors line-clamp-1 mb-2">
+                  {/* Title */}
+                  <h4 className="text-sm font-semibold text-[#211B2B] line-clamp-1 mb-1">
                     {q.title}
                   </h4>
 
-                  {/* Topic Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {q.topicTags.map((tag) => (
+                  {/* Description */}
+                  <p className="text-xs text-[#6F687A] line-clamp-2 leading-relaxed mb-3">
+                    {q.description}
+                  </p>
+
+                  {/* Topic Tag chips */}
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {q.topicTags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-purple-50 text-purple-800 border border-purple-100"
+                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#FAF8FD] text-[#6F687A] border border-[#E8E2EF]"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-
-                  {/* Problem Preview Snippet */}
-                  <p className="text-xs text-purple-900/70 line-clamp-2 leading-relaxed mb-4">
-                    {q.description}
-                  </p>
                 </div>
 
-                {/* Card Bottom Row: Metadata & Action CTA */}
-                <div className="pt-3 border-t border-purple-100 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-3 text-xs text-purple-600 font-medium">
+                {/* Footer Metadata & CTA */}
+                <div className="pt-2.5 border-t border-[#E8E2EF] flex items-center justify-between">
+                  <div className="flex items-center gap-3 text-xs text-[#6F687A]">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-purple-400" />
+                      <Clock className="w-3.5 h-3.5" />
                       {q.estimatedMinutes}m
                     </span>
                     <span className="flex items-center gap-1">
-                      <Users className="w-3.5 h-3.5 text-purple-400" />
-                      {q.solversCount.toLocaleString()} solved
+                      <Users className="w-3.5 h-3.5" />
+                      {q.solversCount.toLocaleString()}
                     </span>
                   </div>
 
@@ -171,7 +156,6 @@ export const QuestionStream: React.FC<QuestionStreamProps> = ({
                     size="sm"
                     onClick={() => onSelectQuestion(q)}
                     rightIcon={isSolved ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> : <ArrowRight className="w-3.5 h-3.5" />}
-                    className={isSolved ? 'border-emerald-300 text-emerald-800 hover:bg-emerald-50' : 'font-bold'}
                   >
                     {isSolved ? 'Review Code' : 'Start Practising'}
                   </Button>
@@ -182,10 +166,9 @@ export const QuestionStream: React.FC<QuestionStreamProps> = ({
         </div>
       )}
 
-      {/* Sample Data Disclaimer Note */}
       <div className="text-center pt-2">
-        <p className="text-xs text-purple-500 italic">
-          * Questions are illustrative sample patterns based on verified company placement formats.
+        <p className="text-[11px] text-[#6F687A]">
+          * Sample practice problems representative of verified corporate recruitment formats.
         </p>
       </div>
 

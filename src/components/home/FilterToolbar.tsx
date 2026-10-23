@@ -2,12 +2,7 @@ import React from 'react';
 import { 
   RotateCcw, 
   Dices, 
-  Search, 
-  Filter, 
-  Building, 
-  IndianRupee, 
-  Zap, 
-  Gauge 
+  Search
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { CompanyTag, PackageRange, PrepMode, Difficulty } from '../../types';
@@ -74,40 +69,39 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
   totalCount
 }) => {
   return (
-    <div className="bg-white rounded-2xl border-2 border-purple-200/90 p-5 shadow-lg shadow-purple-900/5 mb-8">
+    <div className="bg-white rounded-2xl border border-[#E8E2EF] p-4 shadow-xs mb-6">
       
-      {/* Top Search & Actions Row */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-purple-100">
+      {/* Top Search & Actions */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-3 pb-3 border-b border-[#E8E2EF]">
         
         {/* Search Input */}
         <div className="relative w-full md:max-w-md">
-          <Search className="w-4 h-4 text-purple-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#6F687A] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search by topic, algorithm, or company..."
+            placeholder="Search topic, company, or algorithm..."
             value={filters.searchQuery}
             onChange={(e) => onFilterChange({ searchQuery: e.target.value })}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-purple-200 bg-purple-50/40 text-sm text-purple-950 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-white transition-all"
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#E8E2EF] bg-[#FAF8FD] text-xs sm:text-sm text-[#211B2B] placeholder-[#6F687A] focus:outline-none focus:ring-1 focus:ring-[#5425A8] focus:bg-white transition-all"
             aria-label="Search questions"
           />
           {filters.searchQuery && (
             <button
               onClick={() => onFilterChange({ searchQuery: '' })}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-purple-400 hover:text-purple-700"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#6F687A] hover:text-[#211B2B]"
             >
               Clear
             </button>
           )}
         </div>
 
-        {/* Action Controls: Surprise Me & Reset */}
-        <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
+        {/* Surprise Me & Reset */}
+        <div className="flex items-center gap-2 w-full md:w-auto justify-end">
           <Button
             variant="primary"
             size="sm"
             onClick={onSurpriseMe}
-            leftIcon={<Dices className="w-4 h-4" />}
-            className="font-bold text-xs sm:text-sm"
+            leftIcon={<Dices className="w-3.5 h-3.5" />}
           >
             Surprise Me
           </Button>
@@ -116,107 +110,86 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
             variant="outline"
             size="sm"
             onClick={onReset}
-            leftIcon={<RotateCcw className="w-3.5 h-3.5 text-purple-600" />}
-            className="text-xs sm:text-sm text-purple-900 border-purple-300 hover:bg-purple-50"
+            leftIcon={<RotateCcw className="w-3.5 h-3.5 text-[#6F687A]" />}
           >
-            Reset Filters
+            Reset
           </Button>
         </div>
       </div>
 
-      {/* Selectors Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+      {/* Filter Dropdowns Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3">
         
-        {/* 1. Company Selector */}
+        {/* 1. Company */}
         <div>
-          <label className="flex items-center gap-1.5 text-xs font-bold text-purple-900 uppercase tracking-wider mb-1.5">
-            <Building className="w-3.5 h-3.5 text-yellow-600" />
-            <span>Target Company</span>
+          <label className="block text-[11px] font-semibold text-[#6F687A] uppercase mb-1">
+            Company
           </label>
           <select
             value={filters.company}
             onChange={(e) => onFilterChange({ company: e.target.value as CompanyTag | 'All' })}
-            className="w-full px-3 py-2 rounded-xl border border-purple-200 bg-white text-xs sm:text-sm font-semibold text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer"
-            aria-label="Filter by target company"
+            className="w-full px-2.5 py-1.5 rounded-lg border border-[#E8E2EF] bg-white text-xs font-medium text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8] cursor-pointer"
           >
-            {COMPANIES.map((comp) => (
-              <option key={comp} value={comp}>
-                {comp === 'All' ? 'All Recruiters' : comp}
-              </option>
+            {COMPANIES.map((c) => (
+              <option key={c} value={c}>{c === 'All' ? 'All Companies' : c}</option>
             ))}
           </select>
         </div>
 
-        {/* 2. Package Range Selector */}
+        {/* 2. Package */}
         <div>
-          <label className="flex items-center gap-1.5 text-xs font-bold text-purple-900 uppercase tracking-wider mb-1.5">
-            <IndianRupee className="w-3.5 h-3.5 text-yellow-600" />
-            <span>Package Range</span>
+          <label className="block text-[11px] font-semibold text-[#6F687A] uppercase mb-1">
+            Package Range
           </label>
           <select
             value={filters.packageRange}
             onChange={(e) => onFilterChange({ packageRange: e.target.value as PackageRange })}
-            className="w-full px-3 py-2 rounded-xl border border-purple-200 bg-white text-xs sm:text-sm font-semibold text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer"
-            aria-label="Filter by salary package range"
+            className="w-full px-2.5 py-1.5 rounded-lg border border-[#E8E2EF] bg-white text-xs font-medium text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8] cursor-pointer"
           >
-            {PACKAGES.map((pkg) => (
-              <option key={pkg} value={pkg}>
-                {pkg === 'All' ? 'All Salary Packages' : pkg}
-              </option>
+            {PACKAGES.map((p) => (
+              <option key={p} value={p}>{p === 'All' ? 'All Packages' : p}</option>
             ))}
           </select>
         </div>
 
-        {/* 3. Prep Mode Selector */}
+        {/* 3. Prep Mode */}
         <div>
-          <label className="flex items-center gap-1.5 text-xs font-bold text-purple-900 uppercase tracking-wider mb-1.5">
-            <Zap className="w-3.5 h-3.5 text-yellow-600" />
-            <span>Preparation Mode</span>
+          <label className="block text-[11px] font-semibold text-[#6F687A] uppercase mb-1">
+            Prep Mode
           </label>
           <select
             value={filters.mode}
             onChange={(e) => onFilterChange({ mode: e.target.value as PrepMode })}
-            className="w-full px-3 py-2 rounded-xl border border-purple-200 bg-white text-xs sm:text-sm font-semibold text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer"
-            aria-label="Filter by preparation mode"
+            className="w-full px-2.5 py-1.5 rounded-lg border border-[#E8E2EF] bg-white text-xs font-medium text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8] cursor-pointer"
           >
-            {MODES.map((mode) => (
-              <option key={mode} value={mode}>
-                {mode === 'All' ? 'All Modes (Coding & MCQ)' : mode}
-              </option>
+            {MODES.map((m) => (
+              <option key={m} value={m}>{m === 'All' ? 'All Modes' : m}</option>
             ))}
           </select>
         </div>
 
-        {/* 4. Difficulty Level Selector */}
+        {/* 4. Difficulty */}
         <div>
-          <label className="flex items-center gap-1.5 text-xs font-bold text-purple-900 uppercase tracking-wider mb-1.5">
-            <Gauge className="w-3.5 h-3.5 text-yellow-600" />
-            <span>Difficulty Level</span>
+          <label className="block text-[11px] font-semibold text-[#6F687A] uppercase mb-1">
+            Difficulty
           </label>
           <select
             value={filters.difficulty}
             onChange={(e) => onFilterChange({ difficulty: e.target.value as Difficulty | 'All' })}
-            className="w-full px-3 py-2 rounded-xl border border-purple-200 bg-white text-xs sm:text-sm font-semibold text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer"
-            aria-label="Filter by difficulty"
+            className="w-full px-2.5 py-1.5 rounded-lg border border-[#E8E2EF] bg-white text-xs font-medium text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8] cursor-pointer"
           >
-            {DIFFICULTIES.map((diff) => (
-              <option key={diff} value={diff}>
-                {diff === 'All' ? 'All Difficulties' : diff}
-              </option>
+            {DIFFICULTIES.map((d) => (
+              <option key={d} value={d}>{d === 'All' ? 'All Levels' : d}</option>
             ))}
           </select>
         </div>
 
       </div>
 
-      {/* Results Counter & Active Filters Tagline */}
-      <div className="flex flex-wrap items-center justify-between gap-2 mt-4 pt-3 border-t border-purple-100 text-xs">
-        <div className="font-bold text-purple-950">
-          Showing <span className="text-yellow-600 font-extrabold">{matchingCount}</span> of {totalCount} practice questions
-        </div>
-        <div className="text-purple-600/80 font-medium">
-          Company tags, frequency and difficulty are aligned with placement patterns
-        </div>
+      {/* Results Counter */}
+      <div className="flex items-center justify-between text-xs text-[#6F687A] pt-3 mt-3 border-t border-[#E8E2EF]">
+        <span>Showing <strong className="text-[#211B2B]">{matchingCount}</strong> of {totalCount} practice questions</span>
+        <span className="hidden sm:inline">Recruiter frequency verified</span>
       </div>
 
     </div>

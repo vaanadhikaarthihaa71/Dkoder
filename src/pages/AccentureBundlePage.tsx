@@ -1,15 +1,9 @@
 import React from 'react';
 import { 
   Sparkles, 
-  BookOpen, 
-  Code2, 
-  CheckCircle2, 
-  ArrowRight, 
-  Clock, 
-  Trophy, 
-  Layers, 
-  Laptop,
-  Check
+  Laptop, 
+  Check, 
+  ArrowRight
 } from 'lucide-react';
 import { Button } from '../components/common/Button';
 
@@ -26,61 +20,59 @@ export const AccentureBundlePage: React.FC<AccentureBundlePageProps> = ({ onNavi
     },
     {
       stage: 'Stage 2: Technical Assessment (40 Qs / 40 Mins)',
-      topics: ['Common Application & MS Office Tech', 'Pseudo-code logic evaluation', 'Cloud, Network Security & Architecture basics'],
+      topics: ['Common Applications & MS Tech', 'Pseudo-code logic evaluation', 'Cloud, Security & Network basics'],
       passing: 'Mandatory technical threshold'
     },
     {
-      stage: 'Stage 3: Hands-on Coding Assessment (2 Qs / 45 Mins)',
-      topics: ['Array manipulation & Two Pointers', 'String anagrams & substring operations', 'Time complexity O(N) constraints'],
+      stage: 'Stage 3: Coding Assessment (2 Qs / 45 Mins)',
+      topics: ['Array manipulation & Two Pointers', 'String operations', 'Time complexity O(N) constraints'],
       passing: 'Determines ASE vs FSE differential offer'
     }
   ];
 
   return (
-    <div className="py-12 bg-[#FAF8FF] min-h-screen">
+    <div className="py-12 bg-[#FAF8FD] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Breadcrumb */}
-        <div className="text-xs text-purple-700 font-semibold flex items-center gap-2">
-          <button onClick={() => onNavigate('/')} className="hover:text-purple-950">Home</button>
+        <div className="text-xs text-[#6F687A] font-medium flex items-center gap-1.5">
+          <button onClick={() => onNavigate('/')} className="hover:text-[#211B2B]">Home</button>
           <span>/</span>
-          <button onClick={() => onNavigate('/')} className="hover:text-purple-950">Bundles</button>
+          <span className="text-[#6F687A]">Bundles</span>
           <span>/</span>
-          <span className="text-purple-950 font-bold">Accenture Fast-Track Bundle</span>
+          <span className="text-[#211B2B] font-semibold">Accenture Fast-Track Bundle</span>
         </div>
 
-        {/* Hero Banner */}
-        <div className="bg-gradient-to-r from-purple-950 via-purple-900 to-purple-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
-          <div className="max-w-3xl space-y-4 relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-400 text-purple-950 text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 fill-purple-950" />
-              <span>Accenture National Drive Preparation</span>
+        {/* Hero Card */}
+        <div className="bg-white border border-[#E8E2EF] rounded-2xl p-8 sm:p-10 shadow-xs">
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Accenture National Recruitment Drive</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-              Accenture Cognitive & Coding <span className="text-yellow-400">Accelerator</span>
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#211B2B] tracking-tight">
+              Accenture Cognitive & Coding <span className="text-[#5425A8]">Accelerator</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-purple-200/90 leading-relaxed font-normal">
-              Structured preparation for Accenture Associate Software Engineer (ASE 4.5 LPA) and Full Stack Engineer (FSE 6.5 LPA) campus recruitment tests.
+            <p className="text-sm sm:text-base text-[#6F687A] leading-relaxed">
+              Targeted practice for Accenture Associate Software Engineer (ASE 4.5 LPA) and Full Stack Engineer (FSE 6.5 LPA) campus hiring rounds.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 pt-3">
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               <Button
                 variant="primary"
-                size="lg"
+                size="md"
                 onClick={() => onNavigate('/')}
-                rightIcon={<ArrowRight className="w-4 h-4" />}
-                className="font-bold shadow-lg shadow-yellow-400/20"
+                rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
               >
                 Practise Accenture Questions
               </Button>
 
               <Button
                 variant="outline"
-                size="lg"
+                size="md"
                 onClick={() => onNavigate('/student/subscription')}
-                className="text-white border-purple-400 hover:bg-purple-800"
               >
                 View Subscription Plans
               </Button>
@@ -89,49 +81,49 @@ export const AccentureBundlePage: React.FC<AccentureBundlePageProps> = ({ onNavi
         </div>
 
         {/* Roles Box */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl border-2 border-purple-200 p-6 shadow-sm">
-            <span className="text-xs font-bold text-yellow-600 uppercase">Core Entry Track</span>
-            <h3 className="text-xl font-bold text-purple-950 mt-1">Associate Software Engineer (ASE)</h3>
-            <div className="text-3xl font-black text-purple-900 my-2">₹4.5 LPA</div>
-            <p className="text-xs text-purple-800/80 leading-relaxed">
-              Assigned based on passing Cognitive + Technical assessments and clearing basic test cases in the coding round.
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-white rounded-xl border border-[#E8E2EF] p-5 shadow-xs">
+            <span className="text-[11px] font-semibold text-[#5425A8] uppercase">Core Entry Track</span>
+            <h3 className="text-base font-bold text-[#211B2B] mt-0.5">Associate Software Engineer (ASE)</h3>
+            <div className="text-2xl font-extrabold text-[#211B2B] my-1.5">₹4.5 LPA</div>
+            <p className="text-xs text-[#6F687A] leading-relaxed">
+              Cognitive + Technical assessments and solving primary test cases in the coding round.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border-2 border-yellow-400 p-6 shadow-sm bg-gradient-to-b from-yellow-50/40 to-white">
-            <span className="text-xs font-bold text-yellow-700 uppercase">Differential Offer Track</span>
-            <h3 className="text-xl font-bold text-purple-950 mt-1">Advanced Associate / Full Stack (FSE)</h3>
-            <div className="text-3xl font-black text-purple-950 my-2">₹6.5 LPA</div>
-            <p className="text-xs text-purple-800/80 leading-relaxed">
-              Awarded to high scorers clearing both coding problems with optimal time complexity and high cognitive accuracy.
+          <div className="bg-white rounded-xl border border-[#FFD84D] p-5 shadow-xs">
+            <span className="text-[11px] font-semibold text-[#92400E] uppercase">Differential Offer Track</span>
+            <h3 className="text-base font-bold text-[#211B2B] mt-0.5">Full Stack Engineer (FSE)</h3>
+            <div className="text-2xl font-extrabold text-[#211B2B] my-1.5">₹6.5 LPA</div>
+            <p className="text-xs text-[#6F687A] leading-relaxed">
+              Awarded to high scorers clearing both coding challenges with optimal Big-O complexity.
             </p>
           </div>
         </div>
 
         {/* 3 Stages */}
-        <div className="bg-white rounded-3xl border-2 border-purple-200 p-8 shadow-sm">
-          <h2 className="text-2xl font-extrabold text-purple-950 mb-6 flex items-center gap-2">
-            <Laptop className="w-6 h-6 text-yellow-600" />
-            <span>Multi-Stage Recruitment Process Breakdown</span>
+        <div className="bg-white rounded-2xl border border-[#E8E2EF] p-6 shadow-xs">
+          <h2 className="text-lg font-bold text-[#211B2B] mb-4 flex items-center gap-2">
+            <Laptop className="w-5 h-5 text-[#5425A8]" />
+            <span>Recruitment Process Stages</span>
           </h2>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {assessmentStages.map((stage, idx) => (
-              <div key={idx} className="p-5 rounded-2xl bg-purple-50/70 border border-purple-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="space-y-1.5">
-                  <h4 className="font-bold text-sm text-purple-950">{stage.stage}</h4>
-                  <div className="flex flex-wrap gap-2 text-xs text-purple-800">
+              <div key={idx} className="p-4 rounded-xl bg-[#FAF8FD] border border-[#E8E2EF] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h4 className="font-semibold text-xs text-[#211B2B] mb-1">{stage.stage}</h4>
+                  <div className="flex flex-wrap gap-1.5 text-xs text-[#6F687A]">
                     {stage.topics.map((t, tIdx) => (
-                      <span key={tIdx} className="px-2 py-0.5 rounded bg-white border border-purple-200 text-[11px] font-medium">
+                      <span key={tIdx} className="px-2 py-0.5 rounded bg-white border border-[#E8E2EF] text-[10px]">
                         {t}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="text-xs font-bold text-purple-900 bg-yellow-300 px-3 py-1.5 rounded-xl shrink-0 self-start sm:self-center">
+                <span className="text-[11px] font-semibold text-[#5425A8] bg-[#F3EDFF] px-2.5 py-1 rounded-lg shrink-0">
                   {stage.passing}
-                </div>
+                </span>
               </div>
             ))}
           </div>

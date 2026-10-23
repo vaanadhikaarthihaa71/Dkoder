@@ -11,9 +11,6 @@ import {
   LayoutDashboard, 
   Flame, 
   Zap, 
-  LogOut, 
-  User, 
-  CheckCircle,
   Laptop
 } from 'lucide-react';
 import { Button } from './Button';
@@ -31,7 +28,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
   const learnRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (learnRef.current && !learnRef.current.contains(event.target as Node)) {
@@ -59,31 +55,25 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-purple-200/80 shadow-sm transition-all">
+    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#E8E2EF] transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           
           {/* Logo & Brand Identity */}
           <div className="flex items-center gap-8">
             <button 
               onClick={() => handleNavClick('/')}
-              className="flex items-center gap-3 group text-left cursor-pointer focus:outline-none"
+              className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
               aria-label="DKODER Home"
             >
-              {/* Distinctive Logo Badge */}
-              <div className="w-11 h-11 rounded-xl bg-purple-900 border-2 border-yellow-400 flex items-center justify-center text-yellow-400 shadow-md shadow-purple-900/20 group-hover:scale-105 transition-transform duration-200">
-                <Code2 className="w-6 h-6 stroke-[2.5]" />
+              <div className="w-9 h-9 rounded-xl bg-[#5425A8] flex items-center justify-center text-[#FFD84D] shadow-sm">
+                <Code2 className="w-5 h-5 stroke-[2.5]" />
               </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-2xl tracking-tight text-purple-950">
-                    DK<span className="text-yellow-500">ODER</span>
-                  </span>
-                  <span className="bg-yellow-400 text-purple-950 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">
-                    PRO
-                  </span>
-                </div>
-                <span className="text-[11px] font-medium text-purple-700/80 tracking-wider uppercase">
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-extrabold text-xl tracking-tight text-[#211B2B]">
+                  DK<span className="text-[#5425A8]">ODER</span>
+                </span>
+                <span className="text-[10px] font-semibold text-[#6F687A] hidden sm:inline-block">
                   Placement LMS
                 </span>
               </div>
@@ -94,10 +84,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
               {/* Home */}
               <button
                 onClick={() => handleNavClick('/')}
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                   isActive('/') 
-                    ? 'text-purple-950 bg-purple-100/70 border border-purple-200' 
-                    : 'text-purple-800 hover:text-purple-950 hover:bg-purple-50'
+                    ? 'text-[#5425A8] bg-[#F3EDFF] font-semibold' 
+                    : 'text-[#6F687A] hover:text-[#211B2B] hover:bg-[#FAF8FD]'
                 }`}
               >
                 Home
@@ -115,57 +105,57 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                   }}
                   aria-expanded={isLearnDropdownOpen}
                   aria-haspopup="true"
-                  className={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                     currentPath.includes('bundles') || currentPath.includes('subscription')
-                      ? 'text-purple-950 bg-purple-100/70 border border-purple-200'
-                      : 'text-purple-800 hover:text-purple-950 hover:bg-purple-50'
+                      ? 'text-[#5425A8] bg-[#F3EDFF] font-semibold'
+                      : 'text-[#6F687A] hover:text-[#211B2B] hover:bg-[#FAF8FD]'
                   }`}
                 >
-                  <span>Learn & Tracks</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isLearnDropdownOpen ? 'rotate-180 text-yellow-600' : 'text-purple-500'}`} />
+                  <span>Learn</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-150 ${isLearnDropdownOpen ? 'rotate-180 text-[#5425A8]' : 'text-[#6F687A]'}`} />
                 </button>
 
                 {/* Dropdown Menu */}
                 {isLearnDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-purple-200 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-                    <div className="px-3 py-2 text-xs font-bold text-purple-400 uppercase tracking-wider">
-                      Preparation Bundles
+                  <div className="absolute left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-[#E8E2EF] p-2 z-50 animate-in fade-in duration-150">
+                    <div className="px-3 py-1.5 text-[11px] font-semibold text-[#6F687A] uppercase tracking-wider">
+                      Company Prep Bundles
                     </div>
 
                     <button
                       onClick={() => handleNavClick('/bundles/infosys')}
-                      className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-purple-50 text-left transition-colors cursor-pointer group"
+                      className="w-full flex items-start gap-3 p-2 rounded-xl hover:bg-[#FAF8FD] text-left transition-colors cursor-pointer group"
                     >
-                      <div className="p-2 rounded-lg bg-yellow-100 text-yellow-800 group-hover:bg-yellow-400 group-hover:text-purple-950 transition-colors">
+                      <div className="p-1.5 rounded-lg bg-[#F3EDFF] text-[#5425A8]">
                         <Sparkles className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-purple-950">Infosys Master Prep</div>
-                        <div className="text-xs text-purple-700/70">InfyTQ & Specialist Programmer (3.6-9.5 LPA)</div>
+                        <div className="text-sm font-semibold text-[#211B2B]">Infosys Master Prep</div>
+                        <div className="text-xs text-[#6F687A]">InfyTQ & Specialist Programmer</div>
                       </div>
                     </button>
 
                     <button
                       onClick={() => handleNavClick('/bundles/accenture')}
-                      className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-purple-50 text-left transition-colors cursor-pointer group"
+                      className="w-full flex items-start gap-3 p-2 rounded-xl hover:bg-[#FAF8FD] text-left transition-colors cursor-pointer group"
                     >
-                      <div className="p-2 rounded-lg bg-purple-100 text-purple-800 group-hover:bg-purple-800 group-hover:text-yellow-300 transition-colors">
+                      <div className="p-1.5 rounded-lg bg-[#F3EDFF] text-[#5425A8]">
                         <Laptop className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-purple-950">Accenture Fast-Track</div>
-                        <div className="text-xs text-purple-700/70">Cognitive & Technical Assessment Modules</div>
+                        <div className="text-sm font-semibold text-[#211B2B]">Accenture Fast-Track</div>
+                        <div className="text-xs text-[#6F687A]">Cognitive & Technical Mock Series</div>
                       </div>
                     </button>
 
-                    <div className="h-px bg-purple-100 my-1" />
+                    <div className="h-px bg-[#E8E2EF] my-1.5" />
 
                     <button
                       onClick={() => handleNavClick('/student/subscription')}
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-purple-50 to-yellow-50/50 hover:from-purple-100 hover:to-yellow-100 text-left transition-colors cursor-pointer"
+                      className="w-full flex items-center justify-between p-2 rounded-xl hover:bg-[#FAF8FD] text-left transition-colors cursor-pointer"
                     >
-                      <span className="text-xs font-bold text-purple-950">View All 5 Subscription Tiers</span>
-                      <span className="text-[11px] font-semibold text-yellow-800 bg-yellow-300 px-2 py-0.5 rounded-full">From ₹699</span>
+                      <span className="text-xs font-semibold text-[#5425A8]">Compare All 5 Plans</span>
+                      <span className="text-[10px] font-semibold text-[#211B2B] bg-[#FFD84D] px-2 py-0.5 rounded-full">From ₹699</span>
                     </button>
                   </div>
                 )}
@@ -174,39 +164,36 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
               {/* Hackathons Link */}
               <button
                 onClick={() => handleNavClick('/hackathons')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                   isActive('/hackathons')
-                    ? 'text-purple-950 bg-purple-100/70 border border-purple-200'
-                    : 'text-purple-800 hover:text-purple-950 hover:bg-purple-50'
+                    ? 'text-[#5425A8] bg-[#F3EDFF] font-semibold'
+                    : 'text-[#6F687A] hover:text-[#211B2B] hover:bg-[#FAF8FD]'
                 }`}
               >
-                <Trophy className="w-4 h-4 text-yellow-600" />
                 <span>Hackathons</span>
               </button>
 
               {/* For Colleges */}
               <button
                 onClick={() => handleNavClick('/colleges')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                   isActive('/colleges')
-                    ? 'text-purple-950 bg-purple-100/70 border border-purple-200'
-                    : 'text-purple-800 hover:text-purple-950 hover:bg-purple-50'
+                    ? 'text-[#5425A8] bg-[#F3EDFF] font-semibold'
+                    : 'text-[#6F687A] hover:text-[#211B2B] hover:bg-[#FAF8FD]'
                 }`}
               >
-                <GraduationCap className="w-4 h-4 text-purple-700" />
                 <span>For Colleges</span>
               </button>
 
               {/* Apply for MOU */}
               <button
                 onClick={() => handleNavClick('/partner-mou')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                   isActive('/partner-mou')
-                    ? 'text-purple-950 bg-purple-100/70 border border-purple-200'
-                    : 'text-purple-800 hover:text-purple-950 hover:bg-purple-50'
+                    ? 'text-[#5425A8] bg-[#F3EDFF] font-semibold'
+                    : 'text-[#6F687A] hover:text-[#211B2B] hover:bg-[#FAF8FD]'
                 }`}
               >
-                <FileCheck2 className="w-4 h-4 text-yellow-600" />
                 <span>Apply for MOU</span>
               </button>
             </nav>
@@ -218,58 +205,55 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
             <div className="relative" ref={profileRef}>
               <button
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                className="flex items-center gap-2 p-1.5 pl-2.5 rounded-xl border border-purple-200 hover:border-purple-300 bg-purple-50/50 hover:bg-purple-100/50 transition-colors cursor-pointer"
+                className="flex items-center gap-2 p-1 pl-2.5 rounded-xl border border-[#E8E2EF] hover:border-[#D4CBDF] bg-white hover:bg-[#FAF8FD] transition-colors cursor-pointer"
                 aria-label="User Profile Menu"
               >
-                <div className="flex items-center gap-1 text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full">
-                  <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                  <span>14 Days</span>
+                <div className="flex items-center gap-1 text-xs font-semibold text-[#92400E]">
+                  <Flame className="w-3.5 h-3.5 fill-[#FFD84D] text-[#92400E]" />
+                  <span>14d</span>
                 </div>
-                <div className="w-7 h-7 rounded-lg bg-purple-900 text-yellow-400 font-bold text-xs flex items-center justify-center">
+                <div className="w-7 h-7 rounded-lg bg-[#5425A8] text-white font-bold text-xs flex items-center justify-center">
                   VK
                 </div>
               </button>
 
               {/* Profile Dropdown */}
               {isProfileDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-purple-200 p-4 z-50 animate-in fade-in duration-150">
-                  <div className="flex items-center gap-3 pb-3 border-b border-purple-100">
-                    <div className="w-10 h-10 rounded-xl bg-purple-900 text-yellow-400 font-bold flex items-center justify-center text-sm shadow">
+                <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-[#E8E2EF] p-4 z-50 animate-in fade-in duration-150">
+                  <div className="flex items-center gap-3 pb-3 border-b border-[#E8E2EF]">
+                    <div className="w-10 h-10 rounded-xl bg-[#5425A8] text-white font-bold flex items-center justify-center text-sm">
                       VK
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-purple-950">Vaanadhi K.</div>
-                      <div className="text-xs text-purple-700/70">Anna Univ (CEG) • CSE</div>
+                      <div className="font-semibold text-sm text-[#211B2B]">Vaanadhi K.</div>
+                      <div className="text-xs text-[#6F687A]">Anna Univ • CSE</div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 my-3 text-center">
-                    <div className="p-2 rounded-xl bg-purple-50 border border-purple-100">
-                      <div className="text-xs text-purple-600">Total XP</div>
-                      <div className="text-sm font-extrabold text-purple-950 flex items-center justify-center gap-1 mt-0.5">
-                        <Zap className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-                        4,280
-                      </div>
+                    <div className="p-2 rounded-xl bg-[#FAF8FD] border border-[#E8E2EF]">
+                      <div className="text-[11px] text-[#6F687A]">Placement XP</div>
+                      <div className="text-sm font-bold text-[#211B2B] mt-0.5">4,280</div>
                     </div>
-                    <div className="p-2 rounded-xl bg-yellow-50 border border-yellow-200">
-                      <div className="text-xs text-amber-700">Solved</div>
-                      <div className="text-sm font-extrabold text-amber-950 mt-0.5">84 Qs</div>
+                    <div className="p-2 rounded-xl bg-[#FAF8FD] border border-[#E8E2EF]">
+                      <div className="text-[11px] text-[#6F687A]">Solved</div>
+                      <div className="text-sm font-bold text-[#211B2B] mt-0.5">84 Qs</div>
                     </div>
                   </div>
 
                   <div className="space-y-1">
                     <button
                       onClick={() => handleNavClick('/dashboard')}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-purple-900 hover:bg-purple-100/70 text-left transition-colors cursor-pointer"
+                      className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-[#211B2B] hover:bg-[#F3EDFF] text-left transition-colors cursor-pointer"
                     >
-                      <LayoutDashboard className="w-4 h-4 text-purple-700" />
-                      <span>Full Student Analytics</span>
+                      <LayoutDashboard className="w-4 h-4 text-[#5425A8]" />
+                      <span>Student Dashboard</span>
                     </button>
                     <button
                       onClick={() => handleNavClick('/student/subscription')}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-purple-900 hover:bg-purple-100/70 text-left transition-colors cursor-pointer"
+                      className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-[#211B2B] hover:bg-[#F3EDFF] text-left transition-colors cursor-pointer"
                     >
-                      <Sparkles className="w-4 h-4 text-yellow-600" />
+                      <Sparkles className="w-4 h-4 text-[#5425A8]" />
                       <span>Manage Subscription</span>
                     </button>
                   </div>
@@ -280,10 +264,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
             {/* Prominent Go to Dashboard CTA */}
             <Button
               variant="primary"
-              size="md"
+              size="sm"
               onClick={() => handleNavClick('/dashboard')}
               leftIcon={<LayoutDashboard className="w-4 h-4" />}
-              className="font-bold shadow-md shadow-yellow-400/20"
             >
               Go to Dashboard
             </Button>
@@ -293,17 +276,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
           <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={() => handleNavClick('/dashboard')}
-              className="sm:hidden px-3 py-1.5 rounded-lg bg-yellow-400 text-purple-950 text-xs font-bold shadow"
+              className="sm:hidden px-3 py-1.5 rounded-lg bg-[#FFD84D] text-[#211B2B] text-xs font-semibold"
             >
               Dashboard
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-xl text-purple-900 hover:bg-purple-100 focus:outline-none"
+              className="p-2 rounded-xl text-[#211B2B] hover:bg-[#FAF8FD] focus:outline-none"
               aria-label="Toggle navigation drawer"
               aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -311,12 +294,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
 
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-purple-200 px-4 pt-3 pb-6 shadow-xl animate-in slide-in-from-top-4 duration-200">
-          <div className="flex flex-col gap-2">
+        <div className="lg:hidden bg-white border-b border-[#E8E2EF] px-4 pt-3 pb-6 shadow-lg animate-in slide-in-from-top-4 duration-200">
+          <div className="flex flex-col gap-1.5">
             <button
               onClick={() => handleNavClick('/')}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left ${
-                isActive('/') ? 'bg-purple-100 text-purple-950' : 'text-purple-800 hover:bg-purple-50'
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-left ${
+                isActive('/') ? 'bg-[#F3EDFF] text-[#5425A8]' : 'text-[#6F687A] hover:bg-[#FAF8FD]'
               }`}
             >
               <span>Home</span>
@@ -324,69 +307,68 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
 
             <button
               onClick={() => handleNavClick('/hackathons')}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left ${
-                isActive('/hackathons') ? 'bg-purple-100 text-purple-950' : 'text-purple-800 hover:bg-purple-50'
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-left ${
+                isActive('/hackathons') ? 'bg-[#F3EDFF] text-[#5425A8]' : 'text-[#6F687A] hover:bg-[#FAF8FD]'
               }`}
             >
-              <Trophy className="w-5 h-5 text-yellow-600" />
-              <span>Hackathons & Challenges</span>
+              <span>Hackathons</span>
             </button>
 
             <button
               onClick={() => handleNavClick('/colleges')}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left ${
-                isActive('/colleges') ? 'bg-purple-100 text-purple-950' : 'text-purple-800 hover:bg-purple-50'
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-left ${
+                isActive('/colleges') ? 'bg-[#F3EDFF] text-[#5425A8]' : 'text-[#6F687A] hover:bg-[#FAF8FD]'
               }`}
             >
-              <GraduationCap className="w-5 h-5 text-purple-700" />
-              <span>For Colleges & TnP Cells</span>
+              <span>For Colleges</span>
             </button>
 
             <button
               onClick={() => handleNavClick('/partner-mou')}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left ${
-                isActive('/partner-mou') ? 'bg-purple-100 text-purple-950' : 'text-purple-800 hover:bg-purple-50'
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-left ${
+                isActive('/partner-mou') ? 'bg-[#F3EDFF] text-[#5425A8]' : 'text-[#6F687A] hover:bg-[#FAF8FD]'
               }`}
             >
-              <FileCheck2 className="w-5 h-5 text-yellow-600" />
-              <span>Apply for College MOU</span>
+              <span>Apply for MOU</span>
             </button>
 
-            <div className="h-px bg-purple-100 my-2" />
+            <div className="h-px bg-[#E8E2EF] my-1" />
 
-            <div className="text-xs font-bold text-purple-400 px-4 mb-1">Company Preparation Bundles</div>
+            <div className="text-[11px] font-semibold text-[#6F687A] px-3.5 pt-1 uppercase tracking-wider">
+              Prep Bundles
+            </div>
 
             <button
               onClick={() => handleNavClick('/bundles/infosys')}
-              className="flex items-center justify-between px-4 py-2.5 rounded-xl bg-purple-50 text-left text-xs font-bold text-purple-950"
+              className="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-medium text-[#211B2B] hover:bg-[#FAF8FD]"
             >
-              <span>Infosys InfyTQ & Specialist Bundle</span>
-              <span className="text-[10px] bg-yellow-400 px-2 py-0.5 rounded text-purple-950">Top Prep</span>
+              <span>Infosys InfyTQ & Specialist</span>
+              <span className="text-[10px] bg-[#FFD84D] px-2 py-0.5 rounded text-[#211B2B] font-bold">Top Prep</span>
             </button>
 
             <button
               onClick={() => handleNavClick('/bundles/accenture')}
-              className="flex items-center justify-between px-4 py-2.5 rounded-xl bg-purple-50 text-left text-xs font-bold text-purple-950"
+              className="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-medium text-[#211B2B] hover:bg-[#FAF8FD]"
             >
-              <span>Accenture Cognitive & Coding Prep</span>
-              <span className="text-[10px] bg-purple-200 px-2 py-0.5 rounded text-purple-950">New 2026</span>
+              <span>Accenture Fast-Track Prep</span>
+              <span className="text-[10px] bg-[#F3EDFF] text-[#5425A8] px-2 py-0.5 rounded font-bold">Module</span>
             </button>
 
             <button
               onClick={() => handleNavClick('/student/subscription')}
-              className="flex items-center justify-between px-4 py-2.5 rounded-xl bg-purple-50 text-left text-xs font-bold text-purple-950"
+              className="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-medium text-[#211B2B] hover:bg-[#FAF8FD]"
             >
-              <span>Pricing & Subscription (5 Plans)</span>
-              <span className="text-[10px] bg-yellow-300 px-2 py-0.5 rounded text-purple-950">₹699/yr</span>
+              <span>Subscription Pricing</span>
+              <span className="text-[10px] bg-[#FAF8FD] border border-[#E8E2EF] text-[#6F687A] px-2 py-0.5 rounded">₹699/yr</span>
             </button>
 
-            <div className="pt-2">
+            <div className="pt-3">
               <Button
                 variant="primary"
-                size="lg"
+                size="md"
                 fullWidth
                 onClick={() => handleNavClick('/dashboard')}
-                leftIcon={<LayoutDashboard className="w-5 h-5" />}
+                leftIcon={<LayoutDashboard className="w-4 h-4" />}
               >
                 Go to Dashboard
               </Button>

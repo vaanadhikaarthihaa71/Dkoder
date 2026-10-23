@@ -2,26 +2,26 @@
 
 @layer base {
   :root {
-    --primary-yellow: #facc15;
-    --primary-yellow-hover: #eab308;
-    --primary-yellow-light: #fef08a;
-    --royal-purple: #581c87;
-    --royal-purple-dark: #3b0764;
-    --royal-purple-light: #7e22ce;
-    --royal-purple-subtle: #f3e8ff;
-    --lavender-bg: #faf8ff;
-    --lavender-card: #ffffff;
-    --lavender-border: #e9d5ff;
-    --lavender-hover: #f5f3ff;
-    --text-main: #1e1b4b;
-    --text-muted: #64748b;
+    --primary-yellow: #FFD84D;
+    --primary-yellow-hover: #F2C836;
+    --primary-yellow-light: #FFF8D6;
+    --deep-purple: #5425A8;
+    --deep-purple-hover: #461C8E;
+    --deep-purple-dark: #371275;
+    --light-lavender: #F3EDFF;
+    --bg-main: #FFFFFF;
+    --bg-alt: #FAF8FD;
+    --text-main: #211B2B;
+    --text-secondary: #6F687A;
+    --border-color: #E8E2EF;
   }
 
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #1e1b4b;
-    background-color: #faf8ff;
+    color: #211B2B;
+    background-color: #FFFFFF;
     overflow-x: hidden;
+    line-height: 1.5;
   }
 
   code, pre, .font-mono {
@@ -29,7 +29,7 @@
   }
 }
 
-/* Custom marquee animations */
+/* Restrained, smooth marquee */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -38,7 +38,7 @@
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 .animate-marquee:hover {
@@ -52,59 +52,36 @@
   }
 }
 
-/* Float animation for mascot and speech bubble */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes pulse-subtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s ease-in-out infinite;
-}
-
-/* Custom scrollbars */
+/* Clean scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f3ff;
+  background: #FAF8FD;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d8b4fe;
+  background: #E8E2EF;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a855f7;
+  background: #D4CBDF;
 }
 
-/* Yellow and Purple Glowing utilities */
-.glow-yellow {
-  box-shadow: 0 0 25px -5px rgba(250, 204, 21, 0.4);
+/* Consistent subtle card shadow */
+.card-subtle-shadow {
+  box-shadow: 0 1px 3px 0 rgba(33, 27, 43, 0.04), 0 1px 2px -1px rgba(33, 27, 43, 0.04);
 }
 
-.glow-purple {
-  box-shadow: 0 10px 25px -5px rgba(88, 28, 135, 0.25);
+.card-hover-shadow {
+  transition: all 0.2s ease-in-out;
 }
 
-.purple-gradient-hero {
-  background: radial-gradient(circle at 80% 20%, rgba(250, 204, 21, 0.15) 0%, transparent 40%),
-              radial-gradient(circle at 20% 80%, rgba(126, 34, 206, 0.12) 0%, transparent 45%),
-              #ffffff;
-}
-
-.purple-dark-hero {
-  background: linear-gradient(135deg, #3b0764 0%, #581c87 50%, #4c1d95 100%);
+.card-hover-shadow:hover {
+  box-shadow: 0 10px 25px -5px rgba(84, 37, 168, 0.07), 0 8px 10px -6px rgba(84, 37, 168, 0.05);
+  border-color: #D4CBDF;
+  transform: translateY(-2px);
 }

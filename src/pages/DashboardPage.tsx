@@ -1,19 +1,9 @@
 import React from 'react';
 import { 
-  LayoutDashboard, 
   Flame, 
-  Zap, 
   CheckCircle2, 
-  Clock, 
-  Trophy, 
   ArrowRight, 
-  Code2, 
-  TrendingUp, 
-  Target, 
-  Sparkles,
-  BookOpen,
-  Calendar,
-  AlertCircle
+  Target 
 } from 'lucide-react';
 import { Button } from '../components/common/Button';
 
@@ -38,247 +28,182 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="py-12 bg-[#FAF8FF] min-h-screen">
+    <div className="py-12 bg-[#FAF8FD] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Breadcrumb & Welcome */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs text-purple-700 font-semibold mb-1 flex items-center gap-2">
-              <button onClick={() => onNavigate('/')} className="hover:text-purple-950">Home</button>
+            <div className="text-xs text-[#6F687A] font-medium mb-1 flex items-center gap-1.5">
+              <button onClick={() => onNavigate('/')} className="hover:text-[#211B2B]">Home</button>
               <span>/</span>
-              <span className="text-purple-950 font-bold">Student Placement Dashboard</span>
+              <span className="text-[#211B2B] font-semibold">Student Dashboard</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-purple-950 tracking-tight">
-              Welcome back, <span className="text-yellow-600">Vaanadhi K.</span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#211B2B] tracking-tight">
+              Welcome back, <span className="text-[#5425A8]">Vaanadhi K.</span>
             </h1>
-            <p className="text-xs sm:text-sm text-purple-700/80">
+            <p className="text-xs sm:text-sm text-[#6F687A]">
               Anna University (CEG Campus) • Computer Science & Engineering (2026 Batch)
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="sm"
               onClick={() => onNavigate('/student/subscription')}
-              className="text-xs border-purple-300"
             >
-              Manage Subscription
+              Subscription
             </Button>
             <Button
               variant="primary"
               size="sm"
               onClick={() => onNavigate('/')}
-              rightIcon={<ArrowRight className="w-4 h-4" />}
-              className="font-bold text-xs"
+              rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
             >
-              Resume Practice Stream
+              Resume Practice
             </Button>
           </div>
         </div>
 
-        {/* 4 Overview Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* 4 Metric Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           
-          {/* Card 1: Readiness Score */}
-          <div className="bg-white rounded-2xl border-2 border-purple-200 p-5 shadow-sm">
-            <div className="flex items-center justify-between text-purple-600 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Placement Readiness</span>
-              <Target className="w-4 h-4 text-yellow-600" />
+          <div className="bg-white rounded-xl border border-[#E8E2EF] p-4 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-[#6F687A] mb-1">
+              <span>Readiness Score</span>
+              <Target className="w-4 h-4 text-[#5425A8]" />
             </div>
-            <div className="text-3xl font-black text-purple-950">84 / 100</div>
-            <div className="text-xs font-semibold text-emerald-600 mt-1 flex items-center gap-1">
-              <TrendingUp className="w-3.5 h-3.5" />
-              <span>Super Dream Qualified (15+ LPA)</span>
-            </div>
+            <div className="text-2xl font-bold text-[#211B2B]">84 / 100</div>
+            <div className="text-[11px] font-medium text-emerald-700 mt-0.5">Super Dream Tier</div>
           </div>
 
-          {/* Card 2: Streak */}
-          <div className="bg-white rounded-2xl border-2 border-purple-200 p-5 shadow-sm">
-            <div className="flex items-center justify-between text-purple-600 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Solving Streak</span>
-              <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
+          <div className="bg-white rounded-xl border border-[#E8E2EF] p-4 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-[#6F687A] mb-1">
+              <span>Current Streak</span>
+              <Flame className="w-4 h-4 fill-[#FFD84D] text-[#92400E]" />
             </div>
-            <div className="text-3xl font-black text-amber-600">14 Days</div>
-            <div className="text-xs font-semibold text-purple-700 mt-1">
-              Top 4% consistent campus coders
-            </div>
+            <div className="text-2xl font-bold text-[#92400E]">14 Days</div>
+            <div className="text-[11px] text-[#6F687A] mt-0.5">Top 5% consistent campus coders</div>
           </div>
 
-          {/* Card 3: Total XP */}
-          <div className="bg-white rounded-2xl border-2 border-purple-200 p-5 shadow-sm">
-            <div className="flex items-center justify-between text-purple-600 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Placement XP</span>
-              <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+          <div className="bg-white rounded-xl border border-[#E8E2EF] p-4 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-[#6F687A] mb-1">
+              <span>Total XP</span>
+              <span className="text-xs font-semibold text-[#5425A8]">Level 8</span>
             </div>
-            <div className="text-3xl font-black text-purple-950">4,280 XP</div>
-            <div className="text-xs font-semibold text-yellow-700 mt-1">
-              Level 8 • Senior Problem Solver
-            </div>
+            <div className="text-2xl font-bold text-[#211B2B]">4,280 XP</div>
+            <div className="text-[11px] text-[#6F687A] mt-0.5">Senior Problem Solver</div>
           </div>
 
-          {/* Card 4: Questions Solved */}
-          <div className="bg-white rounded-2xl border-2 border-purple-200 p-5 shadow-sm">
-            <div className="flex items-center justify-between text-purple-600 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Total Questions</span>
+          <div className="bg-white rounded-xl border border-[#E8E2EF] p-4 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-[#6F687A] mb-1">
+              <span>Problems Solved</span>
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             </div>
-            <div className="text-3xl font-black text-purple-950">84 Solved</div>
-            <div className="text-xs text-purple-600 mt-1 flex items-center gap-2">
-              <span>42 Easy</span> • <span>32 Med</span> • <span>10 Hard</span>
-            </div>
+            <div className="text-2xl font-bold text-[#211B2B]">84 Total</div>
+            <div className="text-[11px] text-[#6F687A] mt-0.5">42 Easy • 32 Med • 10 Hard</div>
           </div>
 
         </div>
 
-        {/* Middle Section: Active Tracks & Topic Skill Breakdown */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Middle: Active Tracks & Skill Breakdown */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
-          {/* Active Prep Tracks (Span 7) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border-2 border-purple-200 p-6 shadow-sm space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-purple-100">
-              <h3 className="text-lg font-bold text-purple-950">
-                Active Enrolled Career Tracks
-              </h3>
-              <span className="text-xs font-bold text-purple-600">
-                2 Tracks Active
-              </span>
-            </div>
+          <div className="lg:col-span-7 bg-white rounded-2xl border border-[#E8E2EF] p-6 shadow-xs space-y-4">
+            <h3 className="text-sm font-bold text-[#211B2B] pb-2 border-b border-[#E8E2EF]">
+              Active Career Tracks
+            </h3>
 
-            {/* Track 1 */}
-            <div className="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-sm text-purple-950">Service-Company Track (TCS & Infosys)</h4>
-                  <p className="text-xs text-purple-700">Target: 3.5 - 7.5 LPA Ninja/Digital Roles</p>
-                </div>
-                <span className="text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
-                  72% Done
-                </span>
+            <div className="p-4 rounded-xl bg-[#FAF8FD] border border-[#E8E2EF] space-y-2">
+              <div className="flex justify-between items-center text-xs">
+                <span className="font-semibold text-[#211B2B]">Service-Company Track (TCS & Infosys)</span>
+                <span className="text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded">72% Done</span>
               </div>
-              <div className="w-full h-2 rounded-full bg-purple-200 overflow-hidden">
-                <div className="h-full bg-yellow-400 rounded-full" style={{ width: '72%' }} />
+              <div className="w-full h-1.5 rounded-full bg-[#E8E2EF] overflow-hidden">
+                <div className="h-full bg-[#5425A8] rounded-full" style={{ width: '72%' }} />
               </div>
-              <div className="flex items-center justify-between text-xs text-purple-600">
+              <div className="flex justify-between text-[11px] text-[#6F687A] pt-1">
                 <span>142 of 280 Questions Solved</span>
-                <button 
-                  onClick={() => onNavigate('/bundles/infosys')} 
-                  className="font-bold text-purple-950 hover:underline"
-                >
-                  Continue Track →
+                <button onClick={() => onNavigate('/bundles/infosys')} className="text-[#5425A8] font-medium hover:underline">
+                  Resume Track →
                 </button>
               </div>
             </div>
 
-            {/* Track 2 */}
-            <div className="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-sm text-purple-950">Big Tech Software Engineer Track</h4>
-                  <p className="text-xs text-purple-700">Target: 18.0 - 45.0 LPA Microsoft, Amazon, Google</p>
-                </div>
-                <span className="text-xs font-bold text-yellow-800 bg-yellow-200 px-2.5 py-0.5 rounded-full">
-                  38% Done
-                </span>
+            <div className="p-4 rounded-xl bg-[#FAF8FD] border border-[#E8E2EF] space-y-2">
+              <div className="flex justify-between items-center text-xs">
+                <span className="font-semibold text-[#211B2B]">Big Tech Software Engineer Track</span>
+                <span className="text-[#92400E] font-semibold bg-[#FFF8D6] px-2 py-0.5 rounded">38% Done</span>
               </div>
-              <div className="w-full h-2 rounded-full bg-purple-200 overflow-hidden">
-                <div className="h-full bg-purple-800 rounded-full" style={{ width: '38%' }} />
+              <div className="w-full h-1.5 rounded-full bg-[#E8E2EF] overflow-hidden">
+                <div className="h-full bg-[#5425A8] rounded-full" style={{ width: '38%' }} />
               </div>
-              <div className="flex items-center justify-between text-xs text-purple-600">
+              <div className="flex justify-between text-[11px] text-[#6F687A] pt-1">
                 <span>48 of 420 Questions Solved</span>
-                <button 
-                  onClick={() => onNavigate('/')} 
-                  className="font-bold text-purple-950 hover:underline"
-                >
-                  Continue Track →
+                <button onClick={() => onNavigate('/')} className="text-[#5425A8] font-medium hover:underline">
+                  Resume Track →
                 </button>
               </div>
             </div>
-
           </div>
 
-          {/* Topic Skill Breakdown (Span 5) */}
-          <div className="lg:col-span-5 bg-white rounded-3xl border-2 border-purple-200 p-6 shadow-sm space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-purple-100">
-              <h3 className="text-lg font-bold text-purple-950">
-                Topic Mastery Radar
-              </h3>
-              <span className="text-xs font-bold text-yellow-600">
-                AI Evaluated
-              </span>
-            </div>
+          <div className="lg:col-span-5 bg-white rounded-2xl border border-[#E8E2EF] p-6 shadow-xs space-y-3">
+            <h3 className="text-sm font-bold text-[#211B2B] pb-2 border-b border-[#E8E2EF]">
+              Topic Mastery Telemetry
+            </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {skillBreakdown.map((sb, idx) => (
                 <div key={idx}>
-                  <div className="flex items-center justify-between text-xs font-semibold mb-1">
-                    <span className="text-purple-950">{sb.topic}</span>
-                    <span className={`font-bold ${sb.percent > 75 ? 'text-emerald-700' : sb.percent > 55 ? 'text-yellow-700' : 'text-purple-700'}`}>
-                      {sb.percent}% ({sb.status})
-                    </span>
+                  <div className="flex justify-between text-xs font-medium mb-1">
+                    <span className="text-[#211B2B]">{sb.topic}</span>
+                    <span className="text-[#6F687A]">{sb.percent}%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-purple-100 overflow-hidden">
+                  <div className="w-full h-1.5 rounded-full bg-[#E8E2EF] overflow-hidden">
                     <div
-                      className={`h-full rounded-full ${
-                        sb.percent > 75 ? 'bg-emerald-500' : sb.percent > 55 ? 'bg-yellow-400' : 'bg-purple-600'
-                      }`}
+                      className="h-full bg-[#5425A8] rounded-full"
                       style={{ width: `${sb.percent}%` }}
                     />
                   </div>
                 </div>
               ))}
             </div>
-
-            <div className="pt-2">
-              <div className="p-3 rounded-xl bg-yellow-50 border border-yellow-200 text-xs text-amber-950 flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                <span>
-                  <strong>Recommendation:</strong> Solve 3 Graph BFS questions this week to boost your Tier-1 readiness index above 90%.
-                </span>
-              </div>
-            </div>
           </div>
 
         </div>
 
-        {/* Recent Submissions Log Table */}
-        <div className="bg-white rounded-3xl border-2 border-purple-200 p-6 shadow-sm">
-          <div className="flex items-center justify-between pb-4 mb-4 border-b border-purple-100">
-            <h3 className="text-lg font-bold text-purple-950">
-              Recent In-Browser Submissions
-            </h3>
-            <span className="text-xs text-purple-600 font-semibold">
-              Live Evaluation History
-            </span>
-          </div>
+        {/* Submissions History Table */}
+        <div className="bg-white rounded-2xl border border-[#E8E2EF] p-6 shadow-xs">
+          <h3 className="text-sm font-bold text-[#211B2B] pb-3 border-b border-[#E8E2EF] mb-3">
+            Recent Practice Submissions
+          </h3>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-purple-950 text-white uppercase text-[11px] font-bold">
+            <table className="w-full text-xs text-left">
+              <thead className="bg-[#FAF8FD] text-[#6F687A] uppercase text-[10px] font-semibold border-b border-[#E8E2EF]">
                 <tr>
-                  <th className="p-3">Problem Title</th>
-                  <th className="p-3">Target Company</th>
-                  <th className="p-3">Language</th>
-                  <th className="p-3">Submitted</th>
-                  <th className="p-3">Verdict</th>
-                  <th className="p-3 text-right">XP Earned</th>
+                  <th className="p-2.5">Problem</th>
+                  <th className="p-2.5">Target</th>
+                  <th className="p-2.5">Language</th>
+                  <th className="p-2.5">Time</th>
+                  <th className="p-2.5">Verdict</th>
+                  <th className="p-2.5 text-right">XP</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-purple-100 font-medium">
+              <tbody className="divide-y divide-[#E8E2EF] text-[#211B2B] font-medium">
                 {recentSubmissions.map((sub, idx) => (
-                  <tr key={idx} className="hover:bg-purple-50/50">
-                    <td className="p-3 font-bold text-purple-950">{sub.title}</td>
-                    <td className="p-3 text-purple-700">{sub.company}</td>
-                    <td className="p-3 font-mono text-purple-600">{sub.lang}</td>
-                    <td className="p-3 text-purple-500">{sub.time}</td>
-                    <td className="p-3">
-                      <span className="inline-flex items-center gap-1 text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-xs">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <tr key={idx} className="hover:bg-[#FAF8FD]">
+                    <td className="p-2.5 font-semibold">{sub.title}</td>
+                    <td className="p-2.5 text-[#6F687A]">{sub.company}</td>
+                    <td className="p-2.5 font-mono text-[#6F687A]">{sub.lang}</td>
+                    <td className="p-2.5 text-[#6F687A]">{sub.time}</td>
+                    <td className="p-2.5">
+                      <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-semibold text-[11px]">
                         {sub.status}
                       </span>
                     </td>
-                    <td className="p-3 text-right font-bold text-yellow-600">{sub.xp}</td>
+                    <td className="p-2.5 text-right font-semibold text-[#5425A8]">{sub.xp}</td>
                   </tr>
                 ))}
               </tbody>

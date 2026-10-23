@@ -76,7 +76,7 @@ export function App() {
 
   return (
     <ToastProvider>
-      <div className="flex flex-col min-h-screen bg-[#FAF8FF] text-[#1E1B4B]">
+      <div className="flex flex-col min-h-screen bg-white text-[#211B2B]">
         <Navbar currentPath={currentPath} onNavigate={handleNavigate} />
         <main className="flex-1">
           {renderCurrentPage()}

@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'yellow' | 'purple' | 'green' | 'amber' | 'slate' | 'outline-purple';
+  variant?: 'yellow' | 'purple' | 'green' | 'amber' | 'slate' | 'outline';
   size?: 'sm' | 'md';
   className?: string;
   icon?: React.ReactNode;
@@ -16,21 +16,21 @@ export const Badge: React.FC<BadgeProps> = ({
   icon
 }) => {
   const variantStyles = {
-    yellow: 'bg-yellow-100 text-yellow-950 border border-yellow-300 font-medium',
-    purple: 'bg-purple-100 text-purple-900 border border-purple-200 font-medium',
-    green: 'bg-emerald-100 text-emerald-900 border border-emerald-200 font-medium',
-    amber: 'bg-amber-100 text-amber-900 border border-amber-300 font-medium',
-    slate: 'bg-slate-100 text-slate-800 border border-slate-200 font-normal',
-    'outline-purple': 'bg-transparent text-purple-800 border border-purple-300 font-medium'
+    yellow: 'bg-[#FFF8D6] text-[#211B2B] border border-[#FFD84D]/60',
+    purple: 'bg-[#F3EDFF] text-[#5425A8] border border-[#E8E2EF]',
+    green: 'bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]',
+    amber: 'bg-[#FFFBEB] text-[#92400E] border border-[#FDE68A]',
+    slate: 'bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0]',
+    outline: 'bg-white text-[#6F687A] border border-[#E8E2EF]'
   };
 
   const sizeStyles = {
-    sm: 'text-[11px] px-2 py-0.5 rounded-md gap-1',
-    md: 'text-xs px-2.5 py-1 rounded-lg gap-1.5'
+    sm: 'text-[11px] px-2 py-0.5 rounded-md gap-1 font-medium',
+    md: 'text-xs px-2.5 py-0.5 rounded-lg gap-1.5 font-medium'
   };
 
   return (
-    <span className={`inline-flex items-center font-semibold tracking-wide ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}>
+    <span className={`inline-flex items-center tracking-normal ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}>
       {icon && <span className="shrink-0">{icon}</span>}
       <span>{children}</span>
     </span>

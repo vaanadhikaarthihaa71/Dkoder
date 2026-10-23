@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import { 
   Trophy, 
-  Calendar, 
   Clock, 
   Users, 
-  Sparkles, 
   Award, 
   ArrowRight, 
-  CheckCircle2, 
-  Timer,
-  Zap,
-  Code2
+  Timer
 } from 'lucide-react';
 import { Button } from '../components/common/Button';
 import { Modal } from '../components/common/Modal';
@@ -37,7 +32,6 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
       participants: '3,840 Students Registered',
       category: 'National Open',
       difficulty: 'Medium to Hard',
-      bannerColor: 'from-purple-900 to-purple-950',
       topics: ['Dynamic Programming', 'Graph BFS/DFS', 'Sliding Window', 'Trie']
     },
     {
@@ -50,7 +44,6 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
       participants: '2,120 Students Registered',
       category: 'Service Track',
       difficulty: 'Easy to Medium',
-      bannerColor: 'from-amber-600 to-yellow-600',
       topics: ['Arrays & Two Pointers', 'Quantitative Aptitude', 'SQL Aggregates', 'Pseudo-code']
     },
     {
@@ -63,7 +56,6 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
       participants: '1,450 Students Registered',
       category: 'Super Dream',
       difficulty: 'Hard',
-      bannerColor: 'from-purple-800 to-indigo-900',
       topics: ['Segment Trees', 'Hard DP', 'System Design Scenarios', 'Graph Shortest Paths']
     }
   ];
@@ -81,7 +73,7 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
     addToast({
       type: 'success',
       title: 'Registration Confirmed! 🎉',
-      description: `Your team "${teamName}" is registered for the contest. An invite link has been generated.`
+      description: `Your team "${teamName}" is registered for the contest.`
     });
     setSelectedContest(null);
     setTeamName('');
@@ -89,78 +81,77 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
   };
 
   return (
-    <div className="py-12 bg-[#FAF8FF] min-h-screen">
+    <div className="py-12 bg-[#FAF8FD] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Breadcrumb Navigation */}
-        <div className="text-xs text-purple-700 font-semibold mb-6 flex items-center gap-2">
-          <button onClick={() => onNavigate('/')} className="hover:text-purple-950">Home</button>
+        {/* Breadcrumb */}
+        <div className="text-xs text-[#6F687A] font-medium mb-6 flex items-center gap-1.5">
+          <button onClick={() => onNavigate('/')} className="hover:text-[#211B2B]">Home</button>
           <span>/</span>
-          <span className="text-purple-950 font-bold">Hackathons & Contests</span>
+          <span className="text-[#211B2B] font-semibold">Hackathons & Contests</span>
         </div>
 
         {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-100 text-yellow-950 text-xs font-bold uppercase tracking-wider mb-3 border border-yellow-300">
-            <Trophy className="w-3.5 h-3.5 text-yellow-600" />
-            <span>Collegiate Coding Arena</span>
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EDFF] text-[#5425A8] text-xs font-semibold uppercase tracking-wider mb-2">
+            <Trophy className="w-3.5 h-3.5" />
+            <span>Collegiate Coding Contests</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-purple-950 tracking-tight">
-            Campus Hackathons & <span className="text-yellow-600">Live Contests</span>
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#211B2B] tracking-tight">
+            Campus Hackathons & <span className="text-[#5425A8]">Live Contests</span>
           </h1>
-          <p className="mt-3 text-base sm:text-lg text-purple-800/80">
-            Compete with thousands of engineering peers across India. Benchmark your speed, test under high-pressure timers, and win placement fast-tracks.
+          <p className="mt-2 text-sm text-[#6F687A]">
+            Compete with engineering peers across India. Benchmark your speed under timed conditions.
           </p>
         </div>
 
         {/* Contests List */}
-        <div className="space-y-6 max-w-4xl mx-auto">
+        <div className="space-y-4 max-w-4xl mx-auto">
           {contests.map((contest) => (
             <div
               key={contest.id}
-              className="bg-white rounded-3xl border-2 border-purple-200/90 hover:border-yellow-400 p-6 sm:p-8 transition-all duration-300 shadow-md hover:shadow-xl"
+              className="bg-white rounded-2xl border border-[#E8E2EF] p-6 hover:border-[#5425A8] transition-all duration-150 shadow-xs"
             >
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-                <div className="space-y-3 flex-1">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
+                <div className="space-y-2 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-purple-100 text-purple-900 border border-purple-200">
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#F3EDFF] text-[#5425A8] border border-[#E8E2EF]">
                       {contest.category}
                     </span>
-                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400 text-purple-950">
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#FFF8D6] text-[#211B2B] border border-[#FFD84D]/40">
                       {contest.difficulty}
                     </span>
-                    <span className="text-xs font-semibold text-purple-600 flex items-center gap-1">
-                      <Timer className="w-3.5 h-3.5 text-yellow-600" />
+                    <span className="text-xs text-[#6F687A] flex items-center gap-1">
+                      <Timer className="w-3.5 h-3.5" />
                       Starts in {contest.startsIn}
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-purple-950">
+                  <h3 className="text-lg font-bold text-[#211B2B]">
                     {contest.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-purple-800/80 leading-relaxed">
+                  <p className="text-xs text-[#6F687A] leading-relaxed">
                     {contest.tagline}
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs text-purple-900">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-purple-600 shrink-0" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs text-[#211B2B]">
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#5425A8]" />
                       <span>Duration: <strong>{contest.duration}</strong></span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-purple-600 shrink-0" />
-                      <span>Participation: <strong>{contest.participants}</strong></span>
+                    <div className="flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5 text-[#5425A8]" />
+                      <span>{contest.participants}</span>
                     </div>
-                    <div className="flex items-center gap-2 sm:col-span-2">
-                      <Award className="w-4 h-4 text-yellow-600 shrink-0" />
-                      <span className="text-purple-950 font-bold">Reward: {contest.prizes}</span>
+                    <div className="flex items-center gap-1.5 sm:col-span-2 text-xs font-semibold text-[#5425A8]">
+                      <Award className="w-3.5 h-3.5 text-[#FFD84D]" />
+                      <span>Reward: {contest.prizes}</span>
                     </div>
                   </div>
 
-                  {/* Topics Covered */}
-                  <div className="flex flex-wrap gap-1.5 pt-2">
+                  <div className="flex flex-wrap gap-1 pt-1">
                     {contest.topics.map((t) => (
-                      <span key={t} className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-purple-50 text-purple-800 border border-purple-100">
+                      <span key={t} className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#FAF8FD] text-[#6F687A] border border-[#E8E2EF]">
                         {t}
                       </span>
                     ))}
@@ -170,10 +161,9 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
                 <div className="w-full lg:w-auto shrink-0 flex flex-col gap-2">
                   <Button
                     variant="primary"
-                    size="lg"
+                    size="sm"
                     onClick={() => setSelectedContest(contest.title)}
-                    rightIcon={<ArrowRight className="w-4 h-4" />}
-                    className="font-bold w-full sm:w-auto shadow-md shadow-yellow-400/20"
+                    rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
                   >
                     Register Team Free
                   </Button>
@@ -181,9 +171,8 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
                     variant="outline"
                     size="sm"
                     onClick={() => onNavigate('/')}
-                    className="text-xs text-purple-900 border-purple-200"
                   >
-                    Practice Similar Qs
+                    Practice Problems
                   </Button>
                 </div>
               </div>
@@ -198,13 +187,13 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
         <Modal
           isOpen={!!selectedContest}
           onClose={() => setSelectedContest(null)}
-          title={`Register for ${selectedContest}`}
+          title={`Register: ${selectedContest}`}
           subtitle="Inter-Collegiate Online Coding Contest"
           maxWidth="md"
         >
-          <form onSubmit={handleRegister} className="space-y-4">
+          <form onSubmit={handleRegister} className="space-y-3.5">
             <div>
-              <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                 Candidate / Team Leader Name *
               </label>
               <input
@@ -213,12 +202,12 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
                 placeholder="e.g. Vaanadhi Kaarthihaa"
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs sm:text-sm text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-purple-900 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-[#211B2B] mb-1">
                 College / Institution Name *
               </label>
               <input
@@ -227,15 +216,15 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
                 placeholder="e.g. Anna University (CEG Campus), Chennai"
                 value={collegeName}
                 onChange={(e) => setCollegeName(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-purple-200 text-sm text-purple-950 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full px-3 py-2 rounded-xl border border-[#E8E2EF] text-xs sm:text-sm text-[#211B2B] focus:outline-none focus:ring-1 focus:ring-[#5425A8]"
               />
             </div>
 
-            <div className="p-3 bg-yellow-50 rounded-xl border border-yellow-200 text-xs text-amber-950">
-              Contest rules: In-browser code editor only. No external IDEs or code sharing. Rankings are evaluated on test case correctness and runtime efficiency.
+            <div className="p-3 bg-[#FAF8FD] rounded-xl border border-[#E8E2EF] text-xs text-[#6F687A]">
+              Rules: In-browser code editor only. Rankings based on automated test suite evaluation and execution time.
             </div>
 
-            <div className="pt-2 flex items-center justify-end gap-2">
+            <div className="pt-2 flex items-center justify-end gap-2 border-t border-[#E8E2EF]">
               <Button
                 type="button"
                 variant="outline"
@@ -247,10 +236,9 @@ export const HackathonsPage: React.FC<HackathonsPageProps> = ({ onNavigate }) =>
               <Button
                 type="submit"
                 variant="primary"
-                size="md"
-                className="font-bold"
+                size="sm"
               >
-                Confirm Contest Registration
+                Confirm Registration
               </Button>
             </div>
           </form>
